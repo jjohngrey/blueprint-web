@@ -44,6 +44,8 @@ export function AsciiHandBackground() {
     let pixelRatio = 1;
     let requestedFrame = 0;
     let renderRequest = 0;
+    let idleTimer = 0;
+    let idlePhase = 0;
     let pointerX = -1000;
     let pointerY = -1000;
     let staticPlacement: Placement = { x: 0, y: 62, scale: 1, opacity: 1 };
@@ -56,7 +58,7 @@ export function AsciiHandBackground() {
 
     const scheduleRender = () => {
       cancelAnimationFrame(renderRequest);
-      renderRequest = requestAnimationFrame(render);
+      renderRequest = requestAnimationFrame(() => render(true));
     };
 
     const readPlacements = () => {
@@ -125,6 +127,16 @@ export function AsciiHandBackground() {
         const sourceY = source.points[index + 1];
         let x = offsetX + sourceX * fitScale;
         let y = offsetY + sourceY * fitScale;
+        if (!reducedMotion) {
+          const horizontalWave = Math.sin(
+            idlePhase + sourceY * 0.065 + sourceX * 0.012,
+          );
+          const verticalWave = Math.sin(
+            idlePhase * 0.82 + sourceX * 0.055,
+          );
+          x += horizontalWave * 3.25;
+          y += verticalWave * 2.25 + horizontalWave * 0.7;
+        }
         const dx = x - localPointerX;
         const dy = y - localPointerY;
         const distance = Math.sqrt(dx * dx + dy * dy);
@@ -147,11 +159,18 @@ export function AsciiHandBackground() {
       context.globalAlpha = 1;
     };
 
-    const render = () => {
-      readPlacements();
+    const render = (measurePlacements = false) => {
+      if (measurePlacements) readPlacements();
       const storySource = frames[requestedFrame] ?? frames.find(Boolean) ?? null;
       drawLayer(staticCanvas, staticContext, staticSource, staticPlacement);
       drawLayer(storyCanvas, storyContext, storySource, storyPlacement);
+    };
+
+    const renderIdleMotion = () => {
+      if (document.hidden || reducedMotion) return;
+      if (staticPlacement.opacity <= 0 && storyPlacement.opacity <= 0) return;
+      idlePhase += 0.14;
+      render();
     };
 
     const configureCanvas = (canvas: HTMLCanvasElement, context: CanvasRenderingContext2D) => {
@@ -243,9 +262,11 @@ export function AsciiHandBackground() {
     window.addEventListener("resize", resize);
     window.addEventListener("pointermove", handlePointerMove, { passive: true });
     window.addEventListener("pointerleave", handlePointerLeave);
+    if (!reducedMotion) idleTimer = window.setInterval(renderIdleMotion, 80);
 
     return () => {
       cancelAnimationFrame(renderRequest);
+      window.clearInterval(idleTimer);
       window.removeEventListener("scroll", scheduleRender);
       window.removeEventListener("resize", resize);
       window.removeEventListener("pointermove", handlePointerMove);
@@ -256,8 +277,16 @@ export function AsciiHandBackground() {
   const canvasClass = "pointer-events-none fixed left-0 top-0 z-0 origin-top-left will-change-transform";
   return (
     <>
-      <canvas ref={staticCanvasRef} aria-hidden="true" className={canvasClass} />
-      <canvas ref={storyCanvasRef} aria-hidden="true" className={canvasClass} />
+      <canvas
+        ref={staticCanvasRef}
+        aria-hidden="true"
+        className={canvasClass}
+      />
+      <canvas
+        ref={storyCanvasRef}
+        aria-hidden="true"
+        className={canvasClass}
+      />
     </>
   );
 }
