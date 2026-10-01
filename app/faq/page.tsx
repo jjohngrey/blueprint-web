@@ -44,7 +44,7 @@ const groups = [
       },
       {
         question: "When will tickets drop?",
-        answer: "December 1.",
+        answer: "December 1, 2026.",
       },
       {
         question: "What does a ticket comprise of?",

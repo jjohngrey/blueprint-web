@@ -18,7 +18,7 @@ export function ImagePlaceholder({
   return (
     <div className="space-y-2">
       <div
-        className="relative min-h-48 overflow-hidden rounded-xl border border-black/15"
+        className="image-placeholder-frame relative min-h-48 overflow-hidden rounded-xl border border-black/15"
         role={src ? undefined : "img"}
         aria-label={src ? undefined : label}
         style={{ aspectRatio: ratio }}

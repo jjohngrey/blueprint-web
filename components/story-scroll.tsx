@@ -4,7 +4,10 @@ import { useEffect, useRef, type ReactNode } from "react";
 import { ImagePlaceholder } from "@/components/layout-primitives";
 
 type StoryPage = {
-  lines: ReactNode[];
+  lines: {
+    content: ReactNode;
+    groupEnd?: boolean;
+  }[];
   images: {
     label: string;
     ratio: string;
@@ -16,9 +19,11 @@ type StoryPage = {
 const pages: StoryPage[] = [
   {
     lines: [
-      <>BluePrint started 10 years ago in 2016.</>,
-      <>Across the years, we&apos;ve welcomed over 2000+ attendees.</>,
-      <>We&apos;ve partnered with hundreds of companies to bring to students the <strong>best in tech.</strong></>,
+      { content: <>BluePrint started 10 years ago in 2016.</>, groupEnd: true },
+      { content: <>Across the years, we&apos;ve welcomed over</> },
+      { content: <>2000+ attendees.</>, groupEnd: true },
+      { content: <>We&apos;ve partnered with hundreds of companies</> },
+      { content: <>to bring to students the <strong>best in tech.</strong></>, groupEnd: true },
     ],
     images: [
       { label: "BluePrint opening ceremonies fireside panel", ratio: "3 / 2", src: "/YALDA24-23.jpg" },
@@ -26,9 +31,14 @@ const pages: StoryPage[] = [
   },
   {
     lines: [
-      <>Our goal and vision for BluePrint this year hasn&apos;t wavered.</>,
-      <>We&apos;re committed to a <strong>bigger and better</strong> BluePrint.</>,
-      <>Students will go to the workplaces where this incredible work is being done.</>,
+      { content: <>Our goal and vision for BluePrint this year</> },
+      { content: <>hasn&apos;t wavered.</>, groupEnd: true },
+      { content: <>We&apos;re committed to a <strong>bigger and better</strong></> },
+      { content: <>BluePrint.</>, groupEnd: true },
+      { content: <>This year, BluePrint evolves from a one-day</> },
+      { content: <>event into three days of conversations,</> },
+      { content: <>office tours, workshops and hands-on</> },
+      { content: <>experiences.</>, groupEnd: true },
     ],
     images: [
       {
@@ -41,9 +51,11 @@ const pages: StoryPage[] = [
   },
   {
     lines: [
-      <>This year, BluePrint takes on 3 separate days.</>,
-      <><strong>Kickoff, showcase, and networking.</strong></>,
-      <>We&apos;re aiming to inspire the next generation, unveil what&apos;s possible, and bridge the gap for you to build relationships.</>,
+      { content: <>This year, BluePrint takes on 3 separate days.</>, groupEnd: true },
+      { content: <><strong>Kickoff, showcase, and networking.</strong></>, groupEnd: true },
+      { content: <>We aim to help students build foundational</> },
+      { content: <>relationships, discover what&apos;s possible and</> },
+      { content: <>leave inspired to shape the future.</>, groupEnd: true },
     ],
     images: [
       { label: "BizTech's in-house NFC card demonstration", ratio: "1 / 1", src: "/DSC04416.jpg" },
@@ -57,13 +69,17 @@ export function StoryScroll() {
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
+    let animationFrame = 0;
+
     const updateProgress = () => {
       const section = sectionRef.current;
       if (!section) return;
 
       const labelBottom = section.querySelector<HTMLElement>("[data-story-label]")?.getBoundingClientRect().bottom ?? 0;
+      const labelFadeLead = 112;
       const storyPages = Array.from(section.querySelectorAll<HTMLElement>("[data-story-page]"));
       const focusLine = window.innerHeight * 0.45;
+      const lineUpdates: Array<{ line: HTMLElement; reveal: number; underLabel: number }> = [];
       let activePage = 0;
 
       storyPages.forEach((page, pageIndex) => {
@@ -78,12 +94,16 @@ export function StoryScroll() {
         lines.forEach((line, index) => {
           const reveal = Math.min(1, Math.max(0, pageProgress * lines.length - index));
           const lineTop = line.getBoundingClientRect().top;
-          const underLabel = Math.min(1, Math.max(0, (labelBottom - lineTop) / 80));
+          const underLabel = Math.min(1, Math.max(0, (labelBottom + labelFadeLead - lineTop) / (labelFadeLead + 80)));
 
-          line.style.setProperty("--reveal", `${reveal * 100}%`);
-          line.style.setProperty("--conceal", `${(1 - reveal) * 100}%`);
-          line.style.setProperty("--under-story", String(underLabel));
+          lineUpdates.push({ line, reveal, underLabel });
         });
+      });
+
+      lineUpdates.forEach(({ line, reveal, underLabel }) => {
+        line.style.setProperty("--reveal", `${reveal * 100}%`);
+        line.style.setProperty("--conceal", `${(1 - reveal) * 100}%`);
+        line.style.setProperty("--under-story", String(underLabel));
       });
 
       section.querySelectorAll<HTMLElement>("[data-story-dot]").forEach((dot, index) => {
@@ -93,19 +113,28 @@ export function StoryScroll() {
       });
     };
 
+    const scheduleUpdate = () => {
+      if (animationFrame) return;
+      animationFrame = requestAnimationFrame(() => {
+        animationFrame = 0;
+        updateProgress();
+      });
+    };
+
     updateProgress();
-    window.addEventListener("scroll", updateProgress, { passive: true });
-    window.addEventListener("resize", updateProgress);
+    window.addEventListener("scroll", scheduleUpdate, { passive: true });
+    window.addEventListener("resize", scheduleUpdate);
 
     return () => {
-      window.removeEventListener("scroll", updateProgress);
-      window.removeEventListener("resize", updateProgress);
+      cancelAnimationFrame(animationFrame);
+      window.removeEventListener("scroll", scheduleUpdate);
+      window.removeEventListener("resize", scheduleUpdate);
     };
   }, []);
 
   return (
     <section id="our-story" ref={sectionRef} data-story-section className="relative scroll-mt-8 border-t border-black/15">
-      <div data-story-label className="sticky top-8 z-10 flex w-fit items-center gap-4 py-1">
+      <div data-story-label className="sticky-section-label sticky-section-label-story flex items-center gap-4">
         <p className="site-eyebrow">Our story</p>
         <ol aria-label="Story progress" className="flex items-center gap-1.5">
           {pages.map((_, index) => (
@@ -124,18 +153,18 @@ export function StoryScroll() {
         <article
           data-story-page
           key={index}
-          className="h-[240svh]"
+          className="h-[240svh] max-sm:h-[300svh]"
         >
-          <div className="sticky top-0 grid min-h-svh grid-cols-2 items-center gap-10 py-16 max-sm:grid-cols-1">
-            <div className="max-w-xl space-y-4 text-2xl leading-tight sm:text-3xl">
+          <div className="sticky top-0 grid min-h-svh grid-cols-2 items-center gap-10 py-16 max-sm:grid-cols-1 max-sm:content-center max-sm:gap-8 max-sm:py-12">
+            <div className="max-w-xl space-y-1 text-2xl leading-tight sm:text-3xl">
               {page.lines.map((line, lineIndex) => (
-                <p className="story-line" data-story-line key={lineIndex}>
-                  <span className="story-line-base">{line}</span>
-                  <span className="story-line-fill" aria-hidden="true">{line}</span>
+                <p className={`story-line${line.groupEnd ? " mb-3" : ""}`} data-story-line key={lineIndex}>
+                  <span className="story-line-base">{line.content}</span>
+                  <span className="story-line-fill" aria-hidden="true">{line.content}</span>
                 </p>
               ))}
             </div>
-            <div className={page.images.length === 1 ? "" : "grid grid-cols-2 gap-3"}>
+            <div className={page.images.length === 1 ? "w-full" : "grid w-full grid-cols-2 gap-4"}>
               {page.images.map((image, imageIndex) => (
                 <div key={image.label} className={page.images.length === 3 && imageIndex === 2 ? "col-span-2" : ""}>
                   <ImagePlaceholder

@@ -1,6 +1,6 @@
 import { AnimatedCountdown } from "@/components/ui/animated-countdown";
 import { StoryScroll } from "@/components/story-scroll";
-import { ImpactSection } from "@/components/impact-section";
+import { ImpactSection } from "@/components/impact-section-v2";
 import { AsciiHandBackground } from "@/components/ascii-hand-background";
 import { SubscriberForm } from "@/components/subscriber-form";
 

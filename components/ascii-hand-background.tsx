@@ -32,7 +32,7 @@ export function AsciiHandBackground() {
     const heroSection = document.querySelector<HTMLElement>("[data-hero-section]");
     const storySection = document.querySelector<HTMLElement>("[data-story-section]");
     const impactSection = document.querySelector<HTMLElement>("[data-impact-section]");
-    if (!staticCanvas || !storyCanvas || !staticContext || !storyContext || !heroSection || !storySection || !impactSection) return;
+    if (!staticCanvas || !storyCanvas || !staticContext || !storyContext || !heroSection || !storySection) return;
 
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const frames: Array<PointSource | null> = Array(FRAME_COUNT).fill(null);
@@ -64,7 +64,7 @@ export function AsciiHandBackground() {
     const readPlacements = () => {
       const heroRect = heroSection.getBoundingClientRect();
       const rect = storySection.getBoundingClientRect();
-      const impactRect = impactSection.getBoundingClientRect();
+      const impactRect = impactSection?.getBoundingClientRect();
       const enter = reducedMotion
         ? Number(rect.top <= viewportHeight * 0.55)
         : clamp((viewportHeight * 0.9 - rect.top) / (viewportHeight * 0.35));
@@ -73,8 +73,9 @@ export function AsciiHandBackground() {
         : clamp((rect.bottom - viewportHeight * 0.15) / (viewportHeight * 0.35));
       const storyOpacity = enter * remain;
       const heroVisibility = clamp(heroRect.bottom / (viewportHeight * 0.35));
-      const impactVisibility = clamp((viewportHeight - impactRect.top) / (viewportHeight * 0.35))
-        * clamp(impactRect.bottom / (viewportHeight * 0.35));
+      const impactVisibility = impactRect
+        ? clamp((viewportHeight - impactRect.top) / (viewportHeight * 0.35)) * clamp(impactRect.bottom / (viewportHeight * 0.35))
+        : 0;
       const staticOpacity = Math.max(heroVisibility, impactVisibility) * (1 - storyOpacity);
       const storyDistance = Math.max(1, rect.height - viewportHeight);
       const storyProgress = reducedMotion ? 0 : clamp(-rect.top / storyDistance);
@@ -148,7 +149,7 @@ export function AsciiHandBackground() {
         }
 
         const variation = seed(sourceX, sourceY);
-        context.globalAlpha = variation > 0.74 ? 0.2 : 0.075;
+        context.globalAlpha = variation > 0.74 ? 0.32 : 0.12;
         context.fillStyle = variation > 0.74 ? "#0057ff" : "#000000";
         context.fillText(
           GLYPHS[Math.floor(variation * GLYPHS.length) % GLYPHS.length],
@@ -186,7 +187,7 @@ export function AsciiHandBackground() {
       viewportHeight = window.innerHeight;
       baseWidth = Math.min(viewportWidth * 0.78, 980);
       baseHeight = Math.min(viewportHeight * 0.72, 700);
-      pixelRatio = Math.min(window.devicePixelRatio || 1, 1.5);
+      pixelRatio = Math.min(window.devicePixelRatio || 1, 3);
       configureCanvas(staticCanvas, staticContext);
       configureCanvas(storyCanvas, storyContext);
       scheduleRender();
