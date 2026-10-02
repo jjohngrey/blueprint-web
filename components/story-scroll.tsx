@@ -75,35 +75,27 @@ export function StoryScroll() {
       const section = sectionRef.current;
       if (!section) return;
 
-      const labelBottom = section.querySelector<HTMLElement>("[data-story-label]")?.getBoundingClientRect().bottom ?? 0;
-      const labelFadeLead = 112;
       const storyPages = Array.from(section.querySelectorAll<HTMLElement>("[data-story-page]"));
       const focusLine = window.innerHeight * 0.45;
-      const lineUpdates: Array<{ line: HTMLElement; reveal: number; underLabel: number }> = [];
+      const lineUpdates: Array<{ line: HTMLElement; reveal: number }> = [];
       let activePage = 0;
 
       storyPages.forEach((page, pageIndex) => {
         const { top, height } = page.getBoundingClientRect();
         const bottom = top + height;
-        const scrollDistance = Math.max(1, height - window.innerHeight);
-        const pageProgress = Math.min(1, Math.max(0, -top / scrollDistance));
         const lines = page.querySelectorAll<HTMLElement>("[data-story-line]");
 
         if (top <= focusLine && bottom > focusLine) activePage = pageIndex;
 
-        lines.forEach((line, index) => {
-          const reveal = Math.min(1, Math.max(0, pageProgress * lines.length - index));
+        lines.forEach((line) => {
           const lineTop = line.getBoundingClientRect().top;
-          const underLabel = Math.min(1, Math.max(0, (labelBottom + labelFadeLead - lineTop) / (labelFadeLead + 80)));
-
-          lineUpdates.push({ line, reveal, underLabel });
+          const reveal = Math.min(1, Math.max(0, (window.innerHeight * 0.9 - lineTop) / (window.innerHeight * 0.25)));
+          lineUpdates.push({ line, reveal });
         });
       });
 
-      lineUpdates.forEach(({ line, reveal, underLabel }) => {
-        line.style.setProperty("--reveal", `${reveal * 100}%`);
+      lineUpdates.forEach(({ line, reveal }) => {
         line.style.setProperty("--conceal", `${(1 - reveal) * 100}%`);
-        line.style.setProperty("--under-story", String(underLabel));
       });
 
       section.querySelectorAll<HTMLElement>("[data-story-dot]").forEach((dot, index) => {
@@ -153,9 +145,9 @@ export function StoryScroll() {
         <article
           data-story-page
           key={index}
-          className="h-[240svh] max-sm:h-[300svh]"
+          className="story-page"
         >
-          <div className="sticky top-0 grid min-h-svh grid-cols-2 items-center gap-10 py-16 max-sm:grid-cols-1 max-sm:content-center max-sm:gap-8 max-sm:py-12">
+          <div className="grid grid-cols-2 items-center gap-10 py-20 max-md:grid-cols-1 max-md:gap-8 max-md:py-12">
             <div className="max-w-xl space-y-1 text-2xl leading-tight sm:text-3xl">
               {page.lines.map((line, lineIndex) => (
                 <p className={`story-line${line.groupEnd ? " mb-3" : ""}`} data-story-line key={lineIndex}>

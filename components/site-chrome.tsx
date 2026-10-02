@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const CONTACT_EMAIL = "blueprint@ubcbiztech.com";
 
@@ -55,19 +56,27 @@ const navigation = [
 ] as const;
 
 export function SiteHeader() {
+  const pathname = usePathname();
   const [copyStatus, setCopyStatus] = useState<"copied" | "failed" | null>(null);
   const [navVisible, setNavVisible] = useState(true);
+  const headerRef = useRef<HTMLElement>(null);
   const feedbackTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const lastScrollPosition = useRef(0);
   const scrollFrame = useRef(0);
 
   useEffect(() => {
     lastScrollPosition.current = window.scrollY;
+    const updateBannerOffset = () => {
+      const header = headerRef.current;
+      if (header) header.style.setProperty("--banner-offset", `${Math.max(0, header.getBoundingClientRect().bottom)}px`);
+    };
+    updateBannerOffset();
 
     const handleScroll = () => {
       if (scrollFrame.current) return;
       scrollFrame.current = requestAnimationFrame(() => {
         const nextPosition = window.scrollY;
+        updateBannerOffset();
         const delta = nextPosition - lastScrollPosition.current;
         if (nextPosition < 24 || delta < -3) setNavVisible(true);
         else if (delta > 6) setNavVisible(false);
@@ -77,12 +86,14 @@ export function SiteHeader() {
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", handleScroll);
     return () => {
       window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
       cancelAnimationFrame(scrollFrame.current);
       if (feedbackTimer.current) clearTimeout(feedbackTimer.current);
     };
-  }, []);
+  }, [pathname]);
 
   const copyContactEmail = async () => {
     try {
@@ -105,16 +116,16 @@ export function SiteHeader() {
   };
 
   return (
-    <header className="site-header-sticky w-full">
-      <a
+    <header ref={headerRef} className="site-header-sticky w-full">
+      {pathname === "/" && <a
         className="news-banner"
         href="https://globalnews.ca/video/11648924/ubc-biztechs-2026-blueprint-conference"
         rel="noreferrer"
         target="_blank"
       >
         <span>UBC BizTech&apos;s BluePrint on Global News</span>
-        <span className="news-banner-link">Watch the video ↗</span>
-      </a>
+        <span className="news-banner-link">Watch the video</span>
+      </a>}
       <nav className="site-scroll-navbar w-full" data-visible={navVisible} onFocusCapture={() => setNavVisible(true)}>
         <div className="mx-auto grid w-full max-w-7xl grid-cols-3 items-center gap-6 px-3 py-4 max-sm:grid-cols-[1fr_auto] max-sm:gap-x-4 max-sm:gap-y-3">
           <div className="flex flex-wrap gap-4 max-sm:order-3 max-sm:col-span-2 max-sm:justify-center">
@@ -154,7 +165,6 @@ export function SiteHeader() {
 export function SiteFooter() {
   return (
     <footer id="site-footer" className="site-footer relative isolate w-full overflow-hidden border-t border-black/15">
-      <div className="footer-artwork" aria-hidden="true" />
       <div className="site-footer-inner relative z-10 mx-auto flex w-full max-w-7xl flex-col justify-between px-3 pb-6 pt-8">
         <div className="flex w-full justify-between gap-8 max-sm:flex-col">
           <div className="space-y-3">
