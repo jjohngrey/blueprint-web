@@ -1,4 +1,28 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="12" fill="#0057ff"/>
-  <path fill="#fff" fill-rule="evenodd" d="M19 12h15c10 0 15 4 15 11 0 5-3 8-7 9 6 1 9 5 9 10 0 7-6 11-16 11H19V12Zm8 7v10h7c5 0 7-2 7-5s-2-5-7-5h-7Zm0 17v10h8c5 0 8-1 8-5s-3-5-8-5h-8Z"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" fill="none">
+  <title>BluePrint Tech Week by UBC BizTech</title>
+  <defs>
+    <radialGradient id="blueprint" cx="0.26" cy="0.15" r="0.95">
+      <stop stop-color="#709aff"/>
+      <stop offset="0.58" stop-color="#0057ff"/>
+      <stop offset="1" stop-color="#0039b8"/>
+    </radialGradient>
+    <clipPath id="disc">
+      <circle cx="32" cy="32" r="32"/>
+    </clipPath>
+  </defs>
+  <circle cx="32" cy="32" r="32" fill="url(#blueprint)"/>
+  <path d="M8 0v64M16 0v64M24 0v64M32 0v64M40 0v64M48 0v64M56 0v64M0 8h64M0 16h64M0 24h64M0 32h64M0 40h64M0 48h64M0 56h64"
+    stroke="#fff" stroke-opacity=".13" stroke-width=".5" clip-path="url(#disc)"/>
+  <!-- Original BizTech geometry: Product+ Figma, Banners/Logo, node 288:62. -->
+  <g fill="#fff" transform="translate(14.33 10) scale(.31)">
+    <rect width="65.6537" height="14.7751" rx="7.38755" transform="matrix(0.933582 -0.358364 0.358372 0.933579 0.308594 23.528)"/>
+    <rect x="2.60645" y="119.525" width="99.079" height="14.6665" rx="7.33324" transform="rotate(-90 2.60645 119.525)"/>
+    <rect x="50.1921" y="49.778" width="47.584" height="14.6665" rx="7.33324" transform="rotate(-90 50.1921 49.778)"/>
+    <rect x="96.4709" y="119.525" width="67.7909" height="14.6665" rx="7.33324" transform="rotate(-90 96.4709 119.525)"/>
+    <rect x="50.1921" y="110.399" width="41.7175" height="14.6665" rx="7.33324" transform="rotate(-90 50.1921 110.399)"/>
+    <rect width="67.4738" height="14.6663" rx="7.33316" transform="matrix(-0.920507 -0.390727 0.390735 -0.920503 62.1101 142.115)"/>
+    <rect width="64.5594" height="14.6663" rx="7.33316" transform="matrix(-0.939694 -0.342017 0.342024 -0.939691 108.707 68.3853)"/>
+    <rect width="65.1672" height="14.6663" rx="7.33316" transform="matrix(-0.939694 -0.342017 0.342024 -0.939691 61.8887 85.5218)"/>
+    <rect width="66.3025" height="14.6663" rx="7.33316" transform="matrix(0.920507 -0.390727 -0.390735 -0.920503 52.6638 142.115)"/>
+  </g>
 </svg>
