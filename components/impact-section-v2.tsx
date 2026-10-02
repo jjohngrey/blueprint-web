@@ -260,7 +260,7 @@ function PartnerCarousel() {
 function TestimonialCarousel() {
   const [active, setActive] = useState(0);
   const touchStart = useRef<{ x: number; y: number } | null>(null);
-  const [quote, name, role, portrait] = testimonials[active];
+  const [quote, name, role] = testimonials[active];
   const advance = (direction: number) => setActive((index) =>
     (index + direction + testimonials.length) % testimonials.length);
 
@@ -298,13 +298,18 @@ function TestimonialCarousel() {
         }}
       >
         <div className="testimonial-avatar">
-          <Image
-            alt={`${name} portrait`}
-            fill
-            sizes="(max-width: 768px) 112px, 160px"
-            src={portrait}
-            style={name === "Ayden Lum" ? { transform: "scale(1.24) translate(-7%, -3%)" } : undefined}
-          />
+          {testimonials.map(([, person, , portrait], index) => (
+            <Image
+              key={portrait}
+              alt={index === active ? `${person} portrait` : ""}
+              fill
+              hidden={index !== active}
+              loading="eager"
+              sizes="(max-width: 768px) 112px, 160px"
+              src={portrait}
+              style={person === "Ayden Lum" ? { transform: "scale(1.24) translate(-7%, -3%)" } : undefined}
+            />
+          ))}
         </div>
         <blockquote className="testimonial-quote">“{quote}”</blockquote>
         <footer>
