@@ -3,15 +3,19 @@ import { StoryScroll } from "@/components/story-scroll";
 import { ImpactSection } from "@/components/impact-section-v2";
 import { AsciiHandBackground } from "@/components/ascii-hand-background";
 import { SubscriberForm } from "@/components/subscriber-form";
+import { connection } from "next/server";
 
-export default function Home() {
+export default async function Home() {
+  await connection();
+  const signupAvailable = !process.env.VERCEL &&
+    (process.env.NODE_ENV === "development" || Boolean(process.env.SUBSCRIBER_DATA_DIR));
   return (
     <main className="relative isolate mx-auto flex w-full max-w-7xl flex-col gap-16 px-3 pb-26 pt-20">
-      <AsciiHandBackground />
       <section data-hero-section className="relative z-10 flex flex-col items-center gap-10 pt-20">
+        <AsciiHandBackground />
         <div className="relative z-10 max-w-3xl space-y-3 text-center">
           <h3 className="site-eyebrow">UBC BIZTECH PRESENTS</h3>
-          <h1 className="site-display-title">BluePrint <span className="text-[var(--highlight-color)] italic tracking-[-0.1em]">Tech Week</span></h1>
+          <h1 className="site-display-title">BluePrint <span className="inline-block text-[var(--highlight-color)] italic tracking-[-0.04em] max-sm:block">Tech Week</span></h1>
           <h2 className="site-hero-subtitle text-balance">
             <span className="relative inline-block">
               Western Canada&apos;s
@@ -42,8 +46,11 @@ export default function Home() {
           </h2>
         </div>
         <div className="relative z-10 flex w-full flex-col items-center gap-10">
-          <AnimatedCountdown targetDate="2027-01-28T00:00:00-07:00" />
-          <SubscriberForm />
+          <div className="flex w-full flex-col items-center gap-5">
+            <p className="event-date">January 28–30, 2027 · Vancouver, BC</p>
+            <AnimatedCountdown targetDate="2027-01-28T00:00:00-08:00" />
+          </div>
+          <SubscriberForm available={signupAvailable} />
 
           <div className="flex w-full flex-col items-center gap-4">
             <div className="w-full p-2">

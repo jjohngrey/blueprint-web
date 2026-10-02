@@ -101,7 +101,7 @@ const testimonials = [
   [
     "Landing an internship at Electronic Arts was a dream come true. It all started with my involvement in BizTech, a club sponsored by EA. Attending BluePrint, gave me direct exposure to the gaming industry and helped me land this opportunity.",
     "Mikayla Liang",
-    "EA Summer 2025 Intern",
+    "Full-time at Electronic Arts",
     "/testimonials/mikayla-liang.webp",
   ],
   [
@@ -259,81 +259,51 @@ function PartnerCarousel() {
 
 function TestimonialCarousel() {
   const [active, setActive] = useState(0);
-  const [paused, setPaused] = useState(false);
-  const timerRef = useRef<HTMLSpanElement>(null);
-  const timerAnimationRef = useRef<Animation | null>(null);
-  const rateFrameRef = useRef(0);
+  const touchStart = useRef<{ x: number; y: number } | null>(null);
   const [quote, name, role, portrait] = testimonials[active];
-
-  useEffect(() => {
-    const timer = timerRef.current;
-    if (!timer) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      timer.style.transform = "scaleX(1)";
-      return;
-    }
-
-    const animation = timer.animate(
-      [{ transform: "scaleX(0)" }, { transform: "scaleX(1)" }],
-      { duration: 10000, easing: "linear", fill: "forwards" }
-    );
-    animation.onfinish = () =>
-      setActive((index) => (index + 1) % testimonials.length);
-    timerAnimationRef.current = animation;
-
-    return () => {
-      animation.cancel();
-      timerAnimationRef.current = null;
-    };
-  }, [active]);
-
-  useEffect(() => {
-    const animation = timerAnimationRef.current;
-    if (!animation) return;
-    cancelAnimationFrame(rateFrameRef.current);
-
-    const from = animation.playbackRate;
-    const to = paused ? 0 : 1;
-    const duration = 180;
-    let startTime: number | null = null;
-
-    const smoothRate = (time: number) => {
-      startTime ??= time;
-      const progress = Math.min((time - startTime) / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      animation.updatePlaybackRate(from + (to - from) * eased);
-      if (progress < 1)
-        rateFrameRef.current = requestAnimationFrame(smoothRate);
-    };
-
-    rateFrameRef.current = requestAnimationFrame(smoothRate);
-    return () => cancelAnimationFrame(rateFrameRef.current);
-  }, [active, paused]);
+  const advance = (direction: number) => setActive((index) =>
+    (index + direction + testimonials.length) % testimonials.length);
 
   return (
     <div
       className="testimonial-shell"
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
-      onFocusCapture={() => setPaused(true)}
-      onBlurCapture={() => setPaused(false)}
+      role="region"
+      aria-roledescription="carousel"
+      aria-label="Attendee testimonials"
+      onKeyDown={(event) => {
+        if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
+          event.preventDefault();
+          advance(event.key === "ArrowLeft" ? -1 : 1);
+        }
+      }}
     >
       <p className="site-eyebrow">Testimonials</p>
-      <div className="testimonial-timer" aria-hidden="true">
-        <span ref={timerRef} key={active} />
-      </div>
-      <article className="testimonial-card" key={active}>
+      <article
+        className="testimonial-card"
+        aria-live="polite"
+        aria-atomic="true"
+        onTouchStart={(event) => {
+          const touch = event.touches[0];
+          touchStart.current = { x: touch.clientX, y: touch.clientY };
+        }}
+        onTouchCancel={() => { touchStart.current = null; }}
+        onTouchEnd={(event) => {
+          const start = touchStart.current;
+          touchStart.current = null;
+          if (!start) return;
+          const touch = event.changedTouches[0];
+          const dx = touch.clientX - start.x;
+          const dy = touch.clientY - start.y;
+          if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) advance(dx < 0 ? 1 : -1);
+        }}
+      >
         <div className="testimonial-avatar">
           <Image
             alt={`${name} portrait`}
             fill
             sizes="(max-width: 768px) 112px, 160px"
             src={portrait}
-            style={
-              name === "Ayden Lum"
-                ? { transform: "scale(1.24) translate(-7%, -3%)" }
-                : undefined
-            }
+            style={name === "Ayden Lum" ? { transform: "scale(1.24) translate(-7%, -3%)" } : undefined}
           />
         </div>
         <blockquote className="testimonial-quote">“{quote}”</blockquote>
@@ -342,18 +312,22 @@ function TestimonialCarousel() {
           <p className="text-xs text-black/55">{role}</p>
         </footer>
       </article>
-      <div className="flex gap-1.5" aria-label="Choose a testimonial">
-        {testimonials.map((item, index) => (
-          <button
-            className="testimonial-dot"
-            data-active={index === active}
-            aria-current={index === active ? "true" : undefined}
-            aria-label={`Show testimonial ${index + 1}: ${item[1]}`}
-            key={index}
-            onClick={() => setActive(index)}
-            type="button"
-          />
-        ))}
+      <div className="testimonial-controls">
+        <button className="testimonial-control" type="button" onClick={() => advance(-1)} aria-label="Previous testimonial">Previous</button>
+        <div className="flex" aria-label="Choose a testimonial">
+          {testimonials.map((item, index) => (
+            <button
+              className="testimonial-dot"
+              data-active={index === active}
+              aria-current={index === active ? "true" : undefined}
+              aria-label={`Show testimonial ${index + 1}: ${item[1]}`}
+              key={index}
+              onClick={() => setActive(index)}
+              type="button"
+            />
+          ))}
+        </div>
+        <button className="testimonial-control" type="button" onClick={() => advance(1)} aria-label="Next testimonial">Next</button>
       </div>
     </div>
   );
@@ -519,7 +493,7 @@ export function ImpactSection() {
       ([entry]) => {
         if (entry.isIntersecting) grid.dataset.visible = "true";
       },
-      { threshold: 0.2 }
+      { threshold: 0 }
     );
     observer.observe(grid);
     return () => observer.disconnect();
@@ -541,38 +515,28 @@ export function ImpactSection() {
         id="our-partners"
         className="scroll-mt-28 border-t border-black/15"
       >
-        <div className="sticky-section-bar">
-          <p className="site-eyebrow">Our partners</p>
-          <div className="relative flex min-h-12 flex-col items-end gap-1">
+        <div className="sticky-section-label">
+          <p className="site-eyebrow">Past partners &amp; represented companies</p>
+        </div>
+        <div className="space-y-16 pb-8 pt-8">
+          <div className="partner-intro">
+            <h2 className="impact-section-title">Partner with BluePrint.</h2>
             <a
               href="mailto:blueprint@ubcbiztech.com?subject=BluePrint%20Tech%20Week%20Partnership"
               className="partner-cta button-roll"
               onClick={() => void copyEmail()}
             >
               <span className="button-roll-window" aria-hidden="true">
-                <span className="button-roll-label button-roll-current">
-                  Partner with us
-                </span>
-                <span className="button-roll-label button-roll-next">
-                  Partner with us
-                </span>
+                <span className="button-roll-label button-roll-current">Partner with us</span>
+                <span className="button-roll-label button-roll-next">Partner with us</span>
               </span>
               <span className="sr-only">Partner with us by email</span>
             </a>
-            <span
-              className="absolute right-0 top-full mt-1 whitespace-nowrap text-xs text-[var(--highlight-color)]"
-              role="status"
-              aria-live="polite"
-            >
-              {copyStatus === "copied"
-                ? "Email copied"
-                : copyStatus === "failed"
-                ? "Could not copy email"
-                : ""}
+            <span className="min-h-4 text-xs text-[var(--highlight-color)]" role="status" aria-live="polite">
+              {copyStatus === "copied" ? "Email copied" : copyStatus === "failed" ? "Email us at blueprint@ubcbiztech.com" : ""}
             </span>
+            <p className="text-sm text-black/60">Companies represented at past BluePrint events. 2027 partners will be announced.</p>
           </div>
-        </div>
-        <div className="space-y-24 pb-8 pt-12 max-sm:space-y-16">
           <PartnerCarousel />
           <div className="why-partner-layout">
             <div className="why-partner-heading">

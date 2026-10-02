@@ -10,7 +10,7 @@ function BellIcon() {
   );
 }
 
-export function SubscriberForm() {
+export function SubscriberForm({ available }: { available: boolean }) {
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "duplicate" | "error">("idle");
 
   const subscribe = async (event: FormEvent<HTMLFormElement>) => {
@@ -43,10 +43,17 @@ export function SubscriberForm() {
         : "";
   const buttonLabel = status === "submitting" ? "Adding you" : "Stay up to date";
 
+  if (!available) return (
+    <div className="flex flex-col items-center gap-2 text-center">
+      <a className="subscriber-button" href="https://www.instagram.com/ubcbiztech/">Follow for updates</a>
+      <p className="text-xs text-black/60">Email updates are coming soon.</p>
+    </div>
+  );
+
   return (
     <form className="subscriber-form" onSubmit={subscribe}>
       <label className="sr-only" htmlFor="subscriber-email">Email address</label>
-      <input id="subscriber-email" name="email" type="email" autoComplete="email" placeholder="Email address" required className="subscriber-input" />
+      <input id="subscriber-email" name="email" type="email" autoComplete="email" placeholder="Email address" maxLength={254} required className="subscriber-input" />
       <input name="website" type="text" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
       <button className="subscriber-button button-roll" type="submit" disabled={status === "submitting"}>
         <span className="button-roll-window" aria-hidden="true">
