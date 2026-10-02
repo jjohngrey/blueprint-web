@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/next";
 import { Schibsted_Grotesk, Source_Serif_4 } from "next/font/google";
 import { SiteFooter, SiteHeader } from "@/components/site-chrome";
 import { CustomCursor } from "@/components/custom-cursor";
@@ -30,6 +31,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <SiteHeader />
         <div className="flex-1">{children}</div>
         <SiteFooter />
+        <Analytics />
       </body>
     </html>
   );
