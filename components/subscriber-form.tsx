@@ -45,7 +45,13 @@ export function SubscriberForm({ available }: { available: boolean }) {
 
   if (!available) return (
     <div className="flex flex-col items-center gap-2 text-center">
-      <a className="subscriber-button" href="https://www.instagram.com/ubcbiztech/">Follow for updates</a>
+      <a className="subscriber-button button-roll" href="https://www.instagram.com/ubcbiztech/">
+        <span className="button-roll-window" aria-hidden="true">
+          <span className="button-roll-label button-roll-current">Follow for updates</span>
+          <span className="button-roll-label button-roll-next">Follow for updates</span>
+        </span>
+        <span className="sr-only">Follow for updates</span>
+      </a>
       <p className="text-xs text-black/60">Email updates are coming soon.</p>
     </div>
   );
