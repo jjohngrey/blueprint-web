@@ -284,7 +284,7 @@ html {
 
 .story-line {
   position: relative;
-
+  text-wrap: pretty;
 }
 
 .story-line-base {
@@ -790,19 +790,14 @@ body:has(.site-scroll-navbar[data-visible="false"]) .impact-sticky-frame {
   transition: transform 480ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.impact-card:not(.impact-news):hover,
-.impact-card:not(.impact-news):focus-visible {
-  color: #fff;
-}
+@media (hover: hover) and (pointer: fine) {
+  .impact-card:not(.impact-news):hover {
+    color: #fff;
+  }
 
-.impact-card:not(.impact-news):hover::before,
-.impact-card:not(.impact-news):focus-visible::before {
-  transform: translateY(0);
-}
-
-.impact-card:not(.impact-news):focus-visible {
-  outline: 2px solid #000;
-  outline-offset: 2px;
+  .impact-card:not(.impact-news):hover::before {
+    transform: translateY(0);
+  }
 }
 
 .impact-card:not(.impact-news) p,
@@ -812,15 +807,13 @@ body:has(.site-scroll-navbar[data-visible="false"]) .impact-sticky-frame {
   transition: color 420ms ease;
 }
 
-.impact-card:not(.impact-news):hover p,
-.impact-card:not(.impact-news):hover dd,
-.impact-card:not(.impact-news):hover dt,
-.impact-card:not(.impact-news):hover .site-eyebrow,
-.impact-card:not(.impact-news):focus-visible p,
-.impact-card:not(.impact-news):focus-visible dd,
-.impact-card:not(.impact-news):focus-visible dt,
-.impact-card:not(.impact-news):focus-visible .site-eyebrow {
-  color: #fff;
+@media (hover: hover) and (pointer: fine) {
+  .impact-card:not(.impact-news):hover p,
+  .impact-card:not(.impact-news):hover dd,
+  .impact-card:not(.impact-news):hover dt,
+  .impact-card:not(.impact-news):hover .site-eyebrow {
+    color: #fff;
+  }
 }
 
 .impact-attendees { grid-area: attendees; }
@@ -856,37 +849,27 @@ body:has(.site-scroll-navbar[data-visible="false"]) .impact-sticky-frame {
   border-bottom-color: #fff;
 }
 
-.impact-faculties:hover .impact-faculty-list > div,
-.impact-faculties:focus-visible .impact-faculty-list > div {
-  border-bottom-color: rgb(0 0 0 / 0.15);
-}
+@media (hover: hover) and (pointer: fine) {
+  .impact-faculties:hover .impact-faculty-list > div {
+    border-bottom-color: rgb(0 0 0 / 0.15);
+  }
 
-.impact-card.impact-faculties:hover,
-.impact-card.impact-faculties:focus-visible,
-.impact-card.impact-faculties:hover h3,
-.impact-card.impact-faculties:hover p,
-.impact-card.impact-faculties:hover dt,
-.impact-card.impact-faculties:hover dd,
-.impact-card.impact-faculties:focus-visible h3,
-.impact-card.impact-faculties:focus-visible p,
-.impact-card.impact-faculties:focus-visible dt,
-.impact-card.impact-faculties:focus-visible dd {
-  color: #000;
-}
+  .impact-card.impact-faculties:hover,
+  .impact-card.impact-faculties:hover h3,
+  .impact-card.impact-faculties:hover p,
+  .impact-card.impact-faculties:hover dt,
+  .impact-card.impact-faculties:hover dd {
+    color: #000;
+  }
 
-.impact-card.impact-partners:hover,
-.impact-card.impact-partners:focus-visible,
-.impact-card.impact-partners:hover h3,
-.impact-card.impact-partners:focus-visible h3,
-.impact-card.impact-award-2026:hover,
-.impact-card.impact-award-2026:focus-visible,
-.impact-card.impact-award-2026:hover h3,
-.impact-card.impact-award-2026:focus-visible h3,
-.impact-card.impact-partners:hover .impact-stat-graphic,
-.impact-card.impact-partners:focus-visible .impact-stat-graphic,
-.impact-card.impact-award-2026:hover .impact-stat-graphic,
-.impact-card.impact-award-2026:focus-visible .impact-stat-graphic {
-  color: #000;
+  .impact-card.impact-partners:hover,
+  .impact-card.impact-partners:hover h3,
+  .impact-card.impact-award-2026:hover,
+  .impact-card.impact-award-2026:hover h3,
+  .impact-card.impact-partners:hover .impact-stat-graphic,
+  .impact-card.impact-award-2026:hover .impact-stat-graphic {
+    color: #000;
+  }
 }
 
 .impact-card.impact-award-2026 {
@@ -937,9 +920,10 @@ body:has(.site-scroll-navbar[data-visible="false"]) .impact-sticky-frame {
   transition: color 180ms ease-out;
 }
 
-.impact-card:hover .impact-stat-graphic,
-.impact-card:focus-visible .impact-stat-graphic {
-  color: #fff;
+@media (hover: hover) and (pointer: fine) {
+  .impact-card:hover .impact-stat-graphic {
+    color: #fff;
+  }
 }
 
 .impact-award-2025 .impact-stat-value,
@@ -1082,19 +1066,14 @@ body:has(.site-scroll-navbar[data-visible="false"]) .impact-sticky-frame {
   transition: transform 480ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.partner-benefit-card:hover,
-.partner-benefit-card:focus-visible {
-  color: #fff;
-}
+@media (hover: hover) and (pointer: fine) {
+  .partner-benefit-card:hover {
+    color: #fff;
+  }
 
-.partner-benefit-card:hover::before,
-.partner-benefit-card:focus-visible::before {
-  transform: scaleY(1);
-}
-
-.partner-benefit-card:focus-visible {
-  outline: 2px solid #000;
-  outline-offset: -3px;
+  .partner-benefit-card:hover::before {
+    transform: scaleY(1);
+  }
 }
 
 .partner-benefit-card > span {
@@ -1119,11 +1098,11 @@ body:has(.site-scroll-navbar[data-visible="false"]) .impact-sticky-frame {
   transition: color 420ms ease;
 }
 
-.partner-benefit-card:hover > span,
-.partner-benefit-card:hover p,
-.partner-benefit-card:focus-visible > span,
-.partner-benefit-card:focus-visible p {
-  color: #fff;
+@media (hover: hover) and (pointer: fine) {
+  .partner-benefit-card:hover > span,
+  .partner-benefit-card:hover p {
+    color: #fff;
+  }
 }
 
 .partner-benefit-image,

@@ -341,7 +341,7 @@ function TestimonialCarousel() {
 function BenefitCard({ index }: { index: number }) {
   const [number, title, description] = benefits[index];
   return (
-    <article className="partner-benefit-card" tabIndex={0}>
+    <article className="partner-benefit-card">
       <span>{number}</span>
       <div>
         <h3>{title}</h3>
@@ -421,7 +421,6 @@ function StatCard({
   return (
     <article
       className={`impact-card impact-stat-card ${className}`}
-      tabIndex={0}
     >
       <div className="impact-stat-card-layout">
         <div>
@@ -439,7 +438,6 @@ function AwardCard({ className, year }: { className: string; year: string }) {
   return (
     <article
       className={`impact-card impact-stat-card ${className}`}
-      tabIndex={0}
     >
       <div className="impact-stat-card-layout">
         <div>
@@ -620,7 +618,7 @@ export function ImpactSection() {
                 label="Net promoter score"
                 graphic="score"
               />
-              <article className="impact-card impact-faculties" tabIndex={0}>
+              <article className="impact-card impact-faculties">
                 <div>
                   <h3 className="text-xl">Faculty representation</h3>
                 </div>
