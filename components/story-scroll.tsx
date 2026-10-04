@@ -4,10 +4,7 @@ import { useEffect, useRef, type ReactNode } from "react";
 import { ImagePlaceholder } from "@/components/layout-primitives";
 
 type StoryPage = {
-  lines: {
-    content: ReactNode;
-    groupEnd?: boolean;
-  }[];
+  paragraphs: ReactNode[];
   images: {
     label: string;
     ratio: string;
@@ -18,27 +15,20 @@ type StoryPage = {
 
 const pages: StoryPage[] = [
   {
-    lines: [
-      { content: <>BluePrint started 10 years ago in 2016.</>, groupEnd: true },
-      { content: <>Across the years, we&apos;ve welcomed over</> },
-      { content: <>2000+ attendees.</>, groupEnd: true },
-      { content: <>We&apos;ve partnered with hundreds of companies</> },
-      { content: <>to bring to students the <strong>best in tech.</strong></>, groupEnd: true },
+    paragraphs: [
+      <>BluePrint started 10 years ago in 2016.</>,
+      <>Across the years, we&apos;ve welcomed over 2000+ attendees.</>,
+      <>We&apos;ve partnered with hundreds of companies to bring to students the <strong>best in tech.</strong></>,
     ],
     images: [
       { label: "BluePrint opening ceremonies fireside panel", ratio: "3 / 2", src: "/YALDA24-23.jpg" },
     ],
   },
   {
-    lines: [
-      { content: <>Our goal and vision for BluePrint this year</> },
-      { content: <>hasn&apos;t wavered.</>, groupEnd: true },
-      { content: <>We&apos;re committed to a <strong>bigger and better</strong></> },
-      { content: <>BluePrint.</>, groupEnd: true },
-      { content: <>This year, BluePrint evolves from a one-day</> },
-      { content: <>event into three days of conversations,</> },
-      { content: <>office tours, workshops and hands-on</> },
-      { content: <>experiences.</>, groupEnd: true },
+    paragraphs: [
+      <>Our goal and vision for BluePrint this year hasn&apos;t wavered.</>,
+      <>We&apos;re committed to a <strong>bigger and better</strong> BluePrint.</>,
+      <>This year, BluePrint evolves from a one-day event into three days of conversations, office tours, workshops and hands-on experiences.</>,
     ],
     images: [
       {
@@ -50,12 +40,10 @@ const pages: StoryPage[] = [
     ],
   },
   {
-    lines: [
-      { content: <>This year, BluePrint takes on 3 separate days.</>, groupEnd: true },
-      { content: <><strong>Kickoff, showcase, and networking.</strong></>, groupEnd: true },
-      { content: <>We aim to help students build foundational</> },
-      { content: <>relationships, discover what&apos;s possible and</> },
-      { content: <>leave inspired to shape the future.</>, groupEnd: true },
+    paragraphs: [
+      <>This year, BluePrint takes on 3 separate days.</>,
+      <><strong>Kickoff, showcase, and networking.</strong></>,
+      <>We aim to help students build foundational relationships, discover what&apos;s possible and leave inspired to shape the future.</>,
     ],
     images: [
       { label: "BizTech's in-house NFC card demonstration", ratio: "1 / 1", src: "/DSC04416.jpg" },
@@ -148,11 +136,11 @@ export function StoryScroll() {
           className="story-page"
         >
           <div className="grid grid-cols-2 items-center gap-10 py-20 max-md:grid-cols-1 max-md:gap-8 max-md:py-12">
-            <div className="max-w-xl space-y-1 text-2xl leading-tight sm:text-3xl">
-              {page.lines.map((line, lineIndex) => (
-                <p className={`story-line${line.groupEnd ? " mb-3" : ""}`} data-story-line key={lineIndex}>
-                  <span className="story-line-base">{line.content}</span>
-                  <span className="story-line-fill" aria-hidden="true">{line.content}</span>
+            <div className="max-w-xl space-y-3 text-2xl leading-tight sm:text-3xl">
+              {page.paragraphs.map((paragraph, paragraphIndex) => (
+                <p className="story-line" data-story-line key={paragraphIndex}>
+                  <span className="story-line-base">{paragraph}</span>
+                  <span className="story-line-fill" aria-hidden="true">{paragraph}</span>
                 </p>
               ))}
             </div>
