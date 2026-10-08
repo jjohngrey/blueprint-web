@@ -37,7 +37,7 @@ export function ButterflySwarm() {
       pointerTarget: hero,
       ink: theme.getPropertyValue("--foreground"),
       accent: theme.getPropertyValue("--highlight-color"),
-      opacity: compact ? 0.3 : 0.45,
+      opacity: compact ? 0.36 : 0.55,
       focus: FOCUS,
     });
     return swarm.dispose;
