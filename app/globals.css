@@ -1481,36 +1481,35 @@ body:has(.site-scroll-navbar[data-visible="false"]) .impact-sticky-frame {
 
 .partner-intro .impact-section-title { margin-bottom: 0; }
 
-.butterfly-background {
+/* Spans the hero intro, from just under the header down to the top of the video. */
+.butterfly-swarm {
   position: absolute;
-  top: 0;
-  left: 50%;
-  width: min(90vw, 980px);
-  aspect-ratio: 420 / 256;
-  transform: translateX(-50%);
+  inset: -10rem -0.75rem -2.5rem;
   pointer-events: none;
 }
 
-.butterfly-position {
-  display: flex;
+/* Fades the swarm out at the container's sides and before the hero video. */
+.butterfly-swarm-canvas {
+  display: block;
   width: 100%;
   height: 100%;
-  perspective: 900px;
-  transition: transform 250ms ease-out;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent), linear-gradient(#000 80%, transparent);
+  -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent), linear-gradient(#000 80%, transparent);
+  mask-composite: intersect;
 }
 
-.butterfly-wing { width: 50%; height: 100%; animation: wing-flap 4s ease-in-out infinite paused; }
-.butterfly-wing-left { transform-origin: right center; }
-.butterfly-wing-right { transform-origin: left center; animation-name: wing-flap-right; }
-.butterfly-background[data-animating="true"] .butterfly-wing { animation-play-state: running; }
-@keyframes wing-flap { 0%, 100% { transform: rotateY(0); } 50% { transform: rotateY(-35deg); } }
-@keyframes wing-flap-right { 0%, 100% { transform: rotateY(0); } 50% { transform: rotateY(35deg); } }
+/* Washes the swarm back behind the hero text. */
+.butterfly-swarm::after {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 32% 46% at 50% 56%, color-mix(in srgb, var(--background) 92%, transparent) 0%, color-mix(in srgb, var(--background) 55%, transparent) 60%, transparent 100%);
+  content: "";
+}
 
+/* On phones the content fills the width, so the wash does too. */
 @media (max-width: 48rem) {
-  .butterfly-background { top: 4rem; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .butterfly-wing { animation: none; }
-  .butterfly-position { transition: none; }
+  .butterfly-swarm::after {
+    background: radial-gradient(ellipse 62% 44% at 50% 55%, color-mix(in srgb, var(--background) 92%, transparent) 0%, color-mix(in srgb, var(--background) 60%, transparent) 65%, transparent 100%);
+  }
 }
