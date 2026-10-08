@@ -36,9 +36,10 @@ export type SwarmOptions = {
 };
 
 const RAMP = [..." .·:-=+*#%@"];
-const FONT_SIZE = 11;
-const LINE_HEIGHT = 12;
-// Scene texels averaged into each glyph cell (roughly square at an 11px monospace).
+// Glyph size sets the ASCII resolution: smaller glyphs, finer butterflies.
+const FONT_SIZE = 8;
+const LINE_HEIGHT = 9;
+// Scene texels averaged into each glyph cell (roughly square for a monospace cell).
 const SAMPLES_X = 4;
 const SAMPLES_Y = 7;
 const MAX_PIXEL_RATIO = 1.5;
