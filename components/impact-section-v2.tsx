@@ -3,7 +3,6 @@
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
-const EMAIL = "blueprint@ubcbiztech.com";
 const partners = [
   ["RBC", "rbc"],
   ["a16z", "a16z"],
@@ -56,6 +55,7 @@ const speakers = [
     last: "Baird",
     title: "Former Chief Customer Officer, Generative AI at Google Cloud",
     image: "/speakers/anna-baird.webp",
+    linkedin: "https://ca.linkedin.com/in/bairdanna",
     position: "center 72%",
     scale: 1.14,
   },
@@ -63,15 +63,17 @@ const speakers = [
     first: "Si Jia",
     last: "Wen",
     title: "Founder, Creatorgen",
-    image: "/speakers/si-jia-wen.webp",
+    image: "/speakers/si-jia-wen-new.jpg",
+    linkedin: "https://www.linkedin.com/in/sijiawen",
     position: "center",
-    scale: 1.35,
+    scale: 1,
   },
   {
     first: "Leo",
     last: "Zhang",
     title: "Community Staff, Tech Career North",
     image: "/speakers/leo-zhang.webp",
+    linkedin: "https://www.linkedin.com/in/leonidas-zhang/",
     position: "center 48%",
   },
   {
@@ -79,6 +81,7 @@ const speakers = [
     last: "van Heerden",
     title: "Data Analytics Expert, Google Cloud",
     image: "/speakers/cornelius-van-heerden.webp",
+    linkedin: "https://ca.linkedin.com/in/corneliusvh",
     position: "center",
     scale: 1.14,
   },
@@ -87,6 +90,7 @@ const speakers = [
     last: "Javier",
     title: "Co-Founder, Wonsulting",
     image: "/speakers/jonathan-javier.webp",
+    linkedin: "https://www.linkedin.com/in/jonathan-wonsulting",
     position: "76% center",
   },
   {
@@ -94,6 +98,7 @@ const speakers = [
     last: "Nguyen",
     title: "Tech Recruiter and Founder, Tesla & BobaTalks",
     image: "/speakers/jeff-nguyen.webp",
+    linkedin: "https://www.linkedin.com/in/jvngyn/",
     position: "center",
   },
 ] as const;
@@ -101,7 +106,7 @@ const testimonials = [
   [
     "Landing an internship at Electronic Arts was a dream come true. It all started with my involvement in BizTech, a club sponsored by EA. Attending BluePrint, gave me direct exposure to the gaming industry and helped me land this opportunity.",
     "Mikayla Liang",
-    "Full-time at Electronic Arts",
+    "Full-time Data Analyst at Electronic Arts",
     "/testimonials/mikayla-liang.webp",
   ],
   [
@@ -318,7 +323,7 @@ function TestimonialCarousel() {
         </footer>
       </article>
       <div className="testimonial-controls">
-        <button className="testimonial-control" type="button" onClick={() => advance(-1)} aria-label="Previous testimonial">Previous</button>
+        <button className="testimonial-control" type="button" onClick={() => advance(-1)} aria-label="Previous testimonial"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="m14 5-7 7 7 7M7 12h13" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" /></svg></button>
         <div className="flex" aria-label="Choose a testimonial">
           {testimonials.map((item, index) => (
             <button
@@ -332,7 +337,7 @@ function TestimonialCarousel() {
             />
           ))}
         </div>
-        <button className="testimonial-control" type="button" onClick={() => advance(1)} aria-label="Next testimonial">Next</button>
+        <button className="testimonial-control" type="button" onClick={() => advance(1)} aria-label="Next testimonial"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="m10 5 7 7-7 7m7-7H4" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" /></svg></button>
       </div>
     </div>
   );
@@ -458,7 +463,7 @@ function SpeakerGrid() {
       <p className="site-eyebrow">Past speakers</p>
       <div className="speaker-compact-grid">
         {speakers.map((speaker) => (
-          <article className="speaker-card" key={speaker.last}>
+          <a className="speaker-card" key={speaker.last} href={speaker.linkedin} target="_blank" rel="noopener noreferrer" aria-label={`View ${speaker.first} ${speaker.last} on LinkedIn`}>
             <div className="speaker-headshot">
               <Image
                 alt={`${speaker.first} ${speaker.last}`}
@@ -476,7 +481,7 @@ function SpeakerGrid() {
               {speaker.first} <span>{speaker.last}</span>
             </h3>
             <p>{speaker.title}</p>
-          </article>
+          </a>
         ))}
       </div>
     </div>
@@ -484,9 +489,6 @@ function SpeakerGrid() {
 }
 
 export function ImpactSection() {
-  const [copyStatus, setCopyStatus] = useState<"copied" | "failed" | null>(
-    null
-  );
   const impactGridRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -502,48 +504,39 @@ export function ImpactSection() {
     return () => observer.disconnect();
   }, []);
 
-  const copyEmail = async () => {
-    try {
-      await navigator.clipboard.writeText(EMAIL);
-      setCopyStatus("copied");
-    } catch {
-      setCopyStatus("failed");
-    }
-    window.setTimeout(() => setCopyStatus(null), 2200);
-  };
-
   return (
     <div className="space-y-28">
       <section
         id="our-partners"
-        className="scroll-mt-28 border-t border-black/15"
+        className="scroll-mt-28"
       >
         <div className="sticky-section-label">
           <p className="site-eyebrow">Past partners &amp; represented companies</p>
         </div>
         <div className="space-y-16 pb-8 pt-8">
           <div className="partner-intro">
-            <h2 className="impact-section-title">Partner with BluePrint.</h2>
-            <a
-              href="mailto:blueprint@ubcbiztech.com?subject=BluePrint%20Tech%20Week%20Partnership"
-              className="partner-cta button-roll"
-              onClick={() => void copyEmail()}
-            >
-              <span className="button-roll-window" aria-hidden="true">
-                <span className="button-roll-label button-roll-current">Partner with us</span>
-                <span className="button-roll-label button-roll-next">Partner with us</span>
-              </span>
-              <span className="sr-only">Partner with us by email</span>
-            </a>
-            <span className="min-h-4 text-xs text-[var(--highlight-color)]" role="status" aria-live="polite">
-              {copyStatus === "copied" ? "Email copied" : copyStatus === "failed" ? "Email us at blueprint@ubcbiztech.com" : ""}
-            </span>
-            <p className="text-sm text-black/60">Companies represented at past BluePrint events. 2027 partners will be announced.</p>
+            <a className="impact-section-title partner-email-link" href="mailto:blueprint@ubcbiztech.com?subject=BluePrint%20Tech%20Week%20Partnership">Partner with BluePrint. <svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M4 12h15m-6-6 6 6-6 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg></a>
           </div>
-          <PartnerCarousel />
+          <div className="partner-carousel-block">
+            <PartnerCarousel />
+            <p className="partner-carousel-caption">Companies represented at past BluePrint events. 2027 partners will be announced.</p>
+          </div>
           <div className="why-partner-layout">
             <div className="why-partner-heading">
               <h2 className="text-balance">Why partner.</h2>
+              <a
+                href="https://drive.google.com/file/d/1EJk7pqLWyb52iTiXHVL-3F0QkUm_GfzP/view"
+                className="partner-cta button-roll"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <span className="button-roll-window" aria-hidden="true">
+                  <span className="button-roll-label button-roll-current">View partnership package</span>
+                  <span className="button-roll-label button-roll-next">View partnership package</span>
+                </span>
+                <svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M4 12h15m-6-6 6 6-6 6" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" /></svg>
+                <span className="sr-only">View partnership package in a new tab</span>
+              </a>
             </div>
             <div className="partner-benefit-grid">
               <BenefitCard index={0} />
@@ -579,10 +572,11 @@ export function ImpactSection() {
         </div>
       </section>
 
+      <hr className="section-divider" />
       <section
         id="our-impact"
         data-impact-section
-        className="scroll-mt-28 border-t border-black/15"
+        className="scroll-mt-28"
       >
         <div className="sticky-section-label">
           <p className="site-eyebrow">Our impact</p>

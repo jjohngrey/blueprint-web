@@ -124,7 +124,7 @@ export function SiteHeader() {
         target="_blank"
       >
         <span>UBC BizTech&apos;s BluePrint on Global News</span>
-        <span className="news-banner-link">Watch the video</span>
+        <span className="news-banner-link">WATCH VIDEO <svg aria-hidden="true" viewBox="0 0 20 20" fill="none"><path d="M4 16 16 4M6 4h10v10" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" /></svg></span>
       </a>}
       <nav className="site-scroll-navbar w-full" data-visible={navVisible} onFocusCapture={() => setNavVisible(true)}>
         <div className="mx-auto grid w-full max-w-7xl grid-cols-3 items-center gap-6 px-3 py-4 max-sm:grid-cols-[1fr_auto] max-sm:gap-x-4 max-sm:gap-y-3">
@@ -165,6 +165,9 @@ export function SiteHeader() {
 export function SiteFooter() {
   return (
     <footer id="site-footer" className="site-footer relative isolate w-full overflow-hidden border-t border-black/15">
+      <div className="footer-video-wrap mx-auto w-full max-w-7xl px-3 pt-8">
+        <video src="/hero.mp4" aria-label="BluePrint Tech Week video" autoPlay loop muted playsInline className="block w-full rounded-lg" />
+      </div>
       <div className="site-footer-inner relative z-10 mx-auto flex w-full max-w-7xl flex-col justify-between px-3 pb-6 pt-8">
         <div className="flex w-full justify-between gap-8 max-sm:flex-col">
           <div className="space-y-3">
@@ -189,7 +192,6 @@ export function SiteFooter() {
             </div>
           </div>
         </div>
-        <h2 className="footer-display-title"><span>BluePrint Tech Week</span></h2>
       </div>
     </footer>
   );

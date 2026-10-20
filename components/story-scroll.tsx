@@ -27,7 +27,7 @@ const pages: StoryPage[] = [
   {
     paragraphs: [
       <>Our goal and vision for BluePrint this year hasn&apos;t wavered.</>,
-      <>We&apos;re committed to a <strong>bigger and better</strong> BluePrint.</>,
+      <>We&apos;re committed to a <strong>bigger and better</strong>{" "}<span className="inline-block pl-[0.2em]">BluePrint.</span></>,
       <>This year, BluePrint evolves from a one-day event into three days of conversations, office tours, workshops and hands-on experiences.</>,
     ],
     images: [
@@ -58,14 +58,13 @@ export function StoryScroll() {
 
   useEffect(() => {
     let animationFrame = 0;
-
     const updateProgress = () => {
       const section = sectionRef.current;
       if (!section) return;
+      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
       const storyPages = Array.from(section.querySelectorAll<HTMLElement>("[data-story-page]"));
-      const focusLine = window.innerHeight * 0.45;
-      const lineUpdates: Array<{ line: HTMLElement; reveal: number }> = [];
+      const focusLine = window.innerHeight * 0.5;
       let activePage = 0;
 
       storyPages.forEach((page, pageIndex) => {
@@ -74,16 +73,18 @@ export function StoryScroll() {
         const lines = page.querySelectorAll<HTMLElement>("[data-story-line]");
 
         if (top <= focusLine && bottom > focusLine) activePage = pageIndex;
-
         lines.forEach((line) => {
-          const lineTop = line.getBoundingClientRect().top;
-          const reveal = Math.min(1, Math.max(0, (window.innerHeight * 0.9 - lineTop) / (window.innerHeight * 0.25)));
-          lineUpdates.push({ line, reveal });
-        });
-      });
+          const fill = line.querySelector<HTMLElement>(".story-line-fill");
+          if (!fill) return;
+          if (reducedMotion) {
+            fill.style.clipPath = "none";
+            return;
+          }
 
-      lineUpdates.forEach(({ line, reveal }) => {
-        line.style.setProperty("--conceal", `${(1 - reveal) * 100}%`);
+          const { top: lineTop, height: lineHeightTotal } = line.getBoundingClientRect();
+          const litHeight = Math.min(lineHeightTotal, Math.max(0, focusLine - lineTop));
+          fill.style.clipPath = `inset(0 0 ${lineHeightTotal - litHeight}px 0)`;
+        });
       });
 
       section.querySelectorAll<HTMLElement>("[data-story-dot]").forEach((dot, index) => {
@@ -113,7 +114,8 @@ export function StoryScroll() {
   }, []);
 
   return (
-    <section id="our-story" ref={sectionRef} data-story-section className="relative scroll-mt-8 border-t border-black/15">
+    <section id="our-story" ref={sectionRef} data-story-section className="relative scroll-mt-8">
+      <hr className="section-divider" />
       <div data-story-label className="sticky-section-label sticky-section-label-story flex items-center gap-4">
         <p className="site-eyebrow">Our story</p>
         <ol aria-label="Story progress" className="flex items-center gap-1.5">

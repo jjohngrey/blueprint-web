@@ -10,8 +10,10 @@ export default async function Home() {
   const signupAvailable = !process.env.VERCEL &&
     (process.env.NODE_ENV === "development" || Boolean(process.env.SUBSCRIBER_DATA_DIR));
   return (
-    <main className="relative isolate mx-auto flex w-full max-w-7xl flex-col gap-16 px-3 pb-26 pt-20">
-      <section data-hero-section className="relative z-10 flex flex-col items-center gap-10 pt-20">
+    <main className="relative isolate mx-auto flex w-full max-w-7xl flex-col gap-16 px-3 pb-26">
+      <div className="scroll-edge-fade scroll-edge-fade-top" aria-hidden="true" />
+      <div className="scroll-edge-fade scroll-edge-fade-bottom" aria-hidden="true" />
+      <section data-hero-section className="relative z-10 flex min-h-[calc(100svh-2.5rem)] flex-col items-center justify-center gap-10 py-16">
         <div className="relative flex w-full flex-col items-center gap-10">
           <ButterflySwarm />
           <div className="relative z-10 max-w-3xl space-y-3 text-center">
@@ -55,24 +57,13 @@ export default async function Home() {
           </div>
         </div>
 
-        <div className="relative z-10 flex w-full flex-col items-center gap-4">
-          <div className="w-full p-2">
-            <video
-              src="/hero.mp4"
-              aria-label="BluePrint Tech Week demo video"
-              autoPlay
-              loop
-              muted
-              playsInline
-              className="block w-full rounded-lg"
-            />
-          </div>
-        </div>
       </section>
 
-      <div className="relative z-10">
+      <div className="relative z-40">
         <StoryScroll />
       </div>
+
+      <hr className="section-divider relative z-10" />
 
       <div className="relative z-10">
         <ImpactSection />
