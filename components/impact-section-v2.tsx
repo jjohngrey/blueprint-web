@@ -2,6 +2,8 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import { CoffeeConnectionFigure } from "@/components/coffee-connection-figure";
+import { PartnerObjectFigure } from "@/components/partner-object-figure";
 
 const partners = [
   ["RBC", "rbc"],
@@ -346,8 +348,11 @@ function TestimonialCarousel() {
 function BenefitCard({ index }: { index: number }) {
   const [number, title, description] = benefits[index];
   return (
-    <article className="partner-benefit-card">
+    <article className="partner-benefit-card" data-coffee={index === 0 ? "true" : undefined} data-object={index === 1 ? "laptop" : index === 2 ? "billboard" : undefined}>
       <span>{number}</span>
+      {index === 0 && <CoffeeConnectionFigure />}
+      {index === 1 && <PartnerObjectFigure variant="laptop" />}
+      {index === 2 && <PartnerObjectFigure variant="billboard" />}
       <div>
         <h3>{title}</h3>
         <p>{description}</p>

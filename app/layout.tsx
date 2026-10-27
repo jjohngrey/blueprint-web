@@ -3,6 +3,8 @@ import { Analytics } from "@vercel/analytics/next";
 import { Schibsted_Grotesk, Source_Serif_4 } from "next/font/google";
 import { SiteFooter, SiteHeader } from "@/components/site-chrome";
 import { CustomCursor } from "@/components/custom-cursor";
+import "react-isokit/styles.css";
+import "react-isokit/themes.css";
 import "./globals.css";
 
 const schibsted = Schibsted_Grotesk({

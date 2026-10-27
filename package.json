@@ -13,6 +13,7 @@
     "next": "16.3.5",
     "react": "19.2.8",
     "react-dom": "19.2.8",
+    "react-isokit": "^0.5.0",
     "three": "^0.186.1"
   },
   "devDependencies": {
