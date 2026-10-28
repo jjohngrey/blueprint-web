@@ -3,12 +3,12 @@ import { StoryScroll } from "@/components/story-scroll";
 import { ImpactSection } from "@/components/impact-section-v2";
 import { ButterflySwarm } from "@/components/butterfly-swarm";
 import { SubscriberForm } from "@/components/subscriber-form";
+import { subscriberSignupAvailable } from "@/lib/subscribers";
 import { connection } from "next/server";
 
 export default async function Home() {
   await connection();
-  const signupAvailable = !process.env.VERCEL &&
-    (process.env.NODE_ENV === "development" || Boolean(process.env.SUBSCRIBER_DATA_DIR));
+  const signupAvailable = subscriberSignupAvailable();
   return (
     <main className="relative isolate mx-auto flex w-full max-w-7xl flex-col gap-16 px-3 pb-26">
       <div className="scroll-edge-fade scroll-edge-fade-top" aria-hidden="true" />

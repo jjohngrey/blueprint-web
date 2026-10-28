@@ -1,34 +1,27 @@
-## Getting Started
+# BluePrint Tech Week
 
-First, run the development server:
+Install dependencies with `npm install`, then run `npm run dev` and open [localhost:3000](http://localhost:3000).
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Email signups
+
+Signups append to a private Google Sheet. Enable the Google Sheets API in a Google Cloud project, create a service account, and share the spreadsheet with that account as an Editor. Create a tab named `Subscribers` with `email` in A1 and `subscribed_at` in B1.
+
+Set these server environment variables in `.env.local` for local development and in the deployment environment for production:
+
+```dotenv
+GOOGLE_SHEETS_SPREADSHEET_ID=your-spreadsheet-id
+GOOGLE_SERVICE_ACCOUNT_EMAIL=your-service-account-email
+GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----\n"
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The spreadsheet ID is the part of its URL between `/d/` and `/edit`. The email and private key come from the service account's credentials. The key accepts real newlines or escaped `\n` sequences. Keep these values private and do not add a `NEXT_PUBLIC_` prefix.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Each valid submission appends the trimmed, lowercased email and a UTC ISO timestamp to `Subscribers!A:B`. Values are stored as raw text. Repeated addresses create additional rows. The app does not read, deduplicate, send newsletters, or fall back to local files. A signup is confirmed only after Google accepts the append. Append requests have a 10 second timeout and automatic retries disabled.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Without all three variables, the page offers the Instagram updates link and the API returns 503 for signups. Google errors also return 503 with a generic message, leaving the entered address in the form for a retry.
 
-## Learn More
+## Deploy and verify
 
-To learn more about Next.js, take a look at the following resources:
+Deploy as a Node.js Next.js application, including on Vercel. Set the three variables for the intended deployment environment and redeploy after changing them. The service account must retain Editor access to the spreadsheet.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Run `npm run lint`, `npm run build`, and `npm test`. After deployment, submit a test address through the form and confirm that a new row appears in the `Subscribers` tab. Submit it again to confirm a second row is appended.
