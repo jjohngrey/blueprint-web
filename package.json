@@ -9,10 +9,12 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@lucasmarkes/hairline": "^0.5.1",
     "@vercel/analytics": "^2.0.1",
     "next": "16.3.5",
     "react": "19.2.8",
     "react-dom": "19.2.8",
+    "react-isokit": "^0.5.0",
     "three": "^0.186.1"
   },
   "devDependencies": {

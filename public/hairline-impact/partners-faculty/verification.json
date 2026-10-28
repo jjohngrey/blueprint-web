@@ -1,0 +1,220 @@
+{
+  "selections": [
+    {
+      "figure": "partners-network",
+      "expected": "RBC",
+      "actual": "RBC",
+      "at": [
+        151,
+        122
+      ],
+      "stable": true,
+      "insideFrame": true
+    },
+    {
+      "figure": "partners-network",
+      "expected": "a16z",
+      "actual": "a16z",
+      "at": [
+        253,
+        117
+      ],
+      "stable": true,
+      "insideFrame": true
+    },
+    {
+      "figure": "partners-network",
+      "expected": "GeoComply",
+      "actual": "GeoComply",
+      "at": [
+        314,
+        170
+      ],
+      "stable": true,
+      "insideFrame": true
+    },
+    {
+      "figure": "partners-network",
+      "expected": "Deloitte",
+      "actual": "Deloitte",
+      "at": [
+        255,
+        223
+      ],
+      "stable": true,
+      "insideFrame": true
+    },
+    {
+      "figure": "partners-network",
+      "expected": "Tesla",
+      "actual": "Tesla",
+      "at": [
+        144,
+        223
+      ],
+      "stable": true,
+      "insideFrame": true
+    },
+    {
+      "figure": "partners-network",
+      "expected": "EA",
+      "actual": "EA",
+      "at": [
+        86,
+        172
+      ],
+      "stable": true,
+      "insideFrame": true
+    },
+    {
+      "figure": "faculty-pie",
+      "expected": "Science 36.3%",
+      "actual": "Science 36.3%",
+      "at": [
+        117,
+        155
+      ],
+      "stable": true,
+      "insideFrame": true
+    },
+    {
+      "figure": "faculty-pie",
+      "expected": "Commerce 36.1%",
+      "actual": "Commerce 36.1%",
+      "at": [
+        237,
+        105
+      ],
+      "stable": true,
+      "insideFrame": true
+    },
+    {
+      "figure": "faculty-pie",
+      "expected": "Engineering 11.3%",
+      "actual": "Engineering 11.3%",
+      "at": [
+        281,
+        159
+      ],
+      "stable": true,
+      "insideFrame": true
+    },
+    {
+      "figure": "faculty-pie",
+      "expected": "Arts 10.9%",
+      "actual": "Arts 10.9%",
+      "at": [
+        242,
+        181
+      ],
+      "stable": true,
+      "insideFrame": true
+    },
+    {
+      "figure": "faculty-pie",
+      "expected": "Other 5.4%",
+      "actual": "Other 5.4%",
+      "at": [
+        200,
+        188
+      ],
+      "stable": true,
+      "insideFrame": true
+    }
+  ],
+  "tours": [
+    {
+      "figure": "partners-network",
+      "stop": 1,
+      "at": [
+        151,
+        122
+      ],
+      "expected": "RBC",
+      "actual": "RBC"
+    },
+    {
+      "figure": "partners-network",
+      "stop": 2,
+      "at": [
+        314,
+        170
+      ],
+      "expected": "GeoComply",
+      "actual": "GeoComply"
+    },
+    {
+      "figure": "partners-network",
+      "stop": 3,
+      "at": [
+        144,
+        223
+      ],
+      "expected": "Tesla",
+      "actual": "Tesla"
+    },
+    {
+      "figure": "partners-network",
+      "stop": 4,
+      "at": null,
+      "expected": "rest",
+      "actual": "rest"
+    },
+    {
+      "figure": "faculty-pie",
+      "stop": 1,
+      "at": [
+        117,
+        155
+      ],
+      "expected": "Science 36.3%",
+      "actual": "Science 36.3%"
+    },
+    {
+      "figure": "faculty-pie",
+      "stop": 2,
+      "at": [
+        281,
+        159
+      ],
+      "expected": "Engineering 11.3%",
+      "actual": "Engineering 11.3%"
+    },
+    {
+      "figure": "faculty-pie",
+      "stop": 3,
+      "at": [
+        200,
+        188
+      ],
+      "expected": "Other 5.4%",
+      "actual": "Other 5.4%"
+    },
+    {
+      "figure": "faculty-pie",
+      "stop": 4,
+      "at": null,
+      "expected": "rest",
+      "actual": "rest"
+    }
+  ],
+  "eightyPixelCaptures": [
+    {
+      "name": "partners-network rest",
+      "file": "hairline-partners-network-80px-rest.png"
+    },
+    {
+      "name": "partners-network answer",
+      "file": "hairline-partners-network-80px-answer.png"
+    },
+    {
+      "name": "faculty-pie rest",
+      "file": "hairline-faculty-pie-80px-rest.png"
+    },
+    {
+      "name": "faculty-pie answer",
+      "file": "hairline-faculty-pie-80px-answer.png"
+    }
+  ],
+  "console": "clean"
+}

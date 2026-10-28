@@ -1,0 +1,3 @@
+# Hairline creation prompt
+
+`/hairline-create` Draw a small physical television as an optional news impact card preview. The existing photograph remains live until this option is selected. Give the television a rounded cabinet, inset glass, two antenna rods, and short feet. The antennas lean slightly toward the pointer using springs, with the nearer antenna answering more through a distance falloff. Keep the silhouette readable at 80px, with rounded geometry, honest occlusion, one highlight at rest, and only the fixed Hairline stroke palette. Put no text or logos inside the SVG. Use the supplied kernel and bench without edits. Ship the figure source and a standalone HTML preview.

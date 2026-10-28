@@ -1,0 +1,2 @@
+paint: rule 04. The figure sets a stroke width, colour, fill, opacity, filter, gradient or shadow of its own. Use the kernel's classes and nothing else: sil, hi, lo, nf, fo, dash, dot, dot m, dot off.
+1 to fix in hairline-partners-network.html

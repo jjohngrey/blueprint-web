@@ -1,0 +1,170 @@
+[
+  {
+    "name": "conference-trophy",
+    "theme": "light",
+    "pose": "rest",
+    "read": "rest",
+    "bright": [
+      {
+        "classes": "sil hi",
+        "stroke": "rgb(35, 35, 39)"
+      }
+    ],
+    "silhouette": "rgb(164, 164, 172)",
+    "width": 80
+  },
+  {
+    "name": "conference-trophy",
+    "theme": "light",
+    "pose": "answer",
+    "read": "trophy",
+    "bright": [
+      {
+        "classes": "sil hi",
+        "stroke": "rgb(35, 35, 39)"
+      }
+    ],
+    "silhouette": "rgb(164, 164, 172)",
+    "width": 80
+  },
+  {
+    "name": "conference-trophy",
+    "theme": "dark",
+    "pose": "rest",
+    "read": "rest",
+    "bright": [
+      {
+        "classes": "sil hi",
+        "stroke": "rgb(208, 214, 224)"
+      }
+    ],
+    "silhouette": "rgb(91, 93, 100)",
+    "width": 80
+  },
+  {
+    "name": "conference-trophy",
+    "theme": "dark",
+    "pose": "answer",
+    "read": "trophy",
+    "bright": [
+      {
+        "classes": "sil hi",
+        "stroke": "rgb(208, 214, 224)"
+      }
+    ],
+    "silhouette": "rgb(91, 93, 100)",
+    "width": 80
+  },
+  {
+    "name": "social-megaphone",
+    "theme": "light",
+    "pose": "rest",
+    "read": "rest",
+    "bright": [
+      {
+        "classes": "sil hi",
+        "stroke": "rgb(35, 35, 39)"
+      }
+    ],
+    "silhouette": "rgb(164, 164, 172)",
+    "width": 80
+  },
+  {
+    "name": "social-megaphone",
+    "theme": "light",
+    "pose": "answer",
+    "read": "megaphone",
+    "bright": [
+      {
+        "classes": "sil hi",
+        "stroke": "rgb(35, 35, 39)"
+      }
+    ],
+    "silhouette": "rgb(164, 164, 172)",
+    "width": 80
+  },
+  {
+    "name": "social-megaphone",
+    "theme": "dark",
+    "pose": "rest",
+    "read": "rest",
+    "bright": [
+      {
+        "classes": "sil hi",
+        "stroke": "rgb(208, 214, 224)"
+      }
+    ],
+    "silhouette": "rgb(91, 93, 100)",
+    "width": 80
+  },
+  {
+    "name": "social-megaphone",
+    "theme": "dark",
+    "pose": "answer",
+    "read": "megaphone",
+    "bright": [
+      {
+        "classes": "sil hi",
+        "stroke": "rgb(208, 214, 224)"
+      }
+    ],
+    "silhouette": "rgb(91, 93, 100)",
+    "width": 80
+  },
+  {
+    "name": "news-television",
+    "theme": "light",
+    "pose": "rest",
+    "read": "rest",
+    "bright": [
+      {
+        "classes": "sil hi",
+        "stroke": "rgb(35, 35, 39)"
+      }
+    ],
+    "silhouette": "rgb(164, 164, 172)",
+    "width": 80
+  },
+  {
+    "name": "news-television",
+    "theme": "light",
+    "pose": "answer",
+    "read": "antenna 1",
+    "bright": [
+      {
+        "classes": "sil hi",
+        "stroke": "rgb(35, 35, 39)"
+      }
+    ],
+    "silhouette": "rgb(35, 35, 39)",
+    "width": 80
+  },
+  {
+    "name": "news-television",
+    "theme": "dark",
+    "pose": "rest",
+    "read": "rest",
+    "bright": [
+      {
+        "classes": "sil hi",
+        "stroke": "rgb(208, 214, 224)"
+      }
+    ],
+    "silhouette": "rgb(91, 93, 100)",
+    "width": 80
+  },
+  {
+    "name": "news-television",
+    "theme": "dark",
+    "pose": "answer",
+    "read": "antenna 1",
+    "bright": [
+      {
+        "classes": "sil hi",
+        "stroke": "rgb(208, 214, 224)"
+      }
+    ],
+    "silhouette": "rgb(208, 214, 224)",
+    "width": 80
+  }
+]

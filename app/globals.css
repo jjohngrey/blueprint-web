@@ -854,11 +854,6 @@ body:has(.site-scroll-navbar[data-visible="false"]) .impact-sticky-frame {
   background: #fff !important;
 }
 
-.impact-partners .impact-stat-graphic,
-.impact-award-2026 .impact-stat-graphic {
-  color: #fff;
-}
-
 .impact-faculties::before {
   background: #fff !important;
 }
@@ -883,9 +878,7 @@ body:has(.site-scroll-navbar[data-visible="false"]) .impact-sticky-frame {
   .impact-card.impact-partners:hover,
   .impact-card.impact-partners:hover h3,
   .impact-card.impact-award-2026:hover,
-  .impact-card.impact-award-2026:hover h3,
-  .impact-card.impact-partners:hover .impact-stat-graphic,
-  .impact-card.impact-award-2026:hover .impact-stat-graphic {
+  .impact-card.impact-award-2026:hover h3 {
     color: #000;
   }
 }
@@ -898,8 +891,7 @@ body:has(.site-scroll-navbar[data-visible="false"]) .impact-sticky-frame {
   transition: transform 180ms ease-out;
 }
 
-.impact-card.impact-award-2026 h3,
-.impact-card.impact-award-2026 .impact-stat-graphic {
+.impact-card.impact-award-2026 h3 {
   transition-duration: 160ms;
   transition-timing-function: ease-out;
 }
@@ -926,35 +918,11 @@ body:has(.site-scroll-navbar[data-visible="false"]) .impact-sticky-frame {
   min-width: 0;
 }
 
-.impact-stat-graphic {
-  width: min(5.5rem, 35%);
-  flex: none;
-  color: var(--highlight-color);
-  fill: none;
-  stroke: currentColor;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-width: 2.25;
-  transition: color 180ms ease-out;
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .impact-card:hover .impact-stat-graphic {
-    color: #fff;
-  }
-}
-
 .impact-award-2025 .impact-stat-value,
 .impact-award-2026 .impact-stat-value,
 .impact-impressions .impact-stat-value {
   min-height: 2.4rem;
   font-size: clamp(2.2rem, 3.8vw, 3.25rem);
-}
-
-.impact-award-2025 .impact-stat-graphic,
-.impact-award-2026 .impact-stat-graphic,
-.impact-impressions .impact-stat-graphic {
-  width: min(3.5rem, 28%);
 }
 
 .impact-award-2025 h3,
@@ -1008,8 +976,7 @@ body:has(.site-scroll-navbar[data-visible="false"]) .impact-sticky-frame {
 
 .impact-news:hover::before,
 .impact-news:focus-visible::before { transform: scale(1.045); }
-.impact-news:hover::after,
-.impact-news:focus-visible::after { opacity: 0.42; }
+
 .impact-news:hover .impact-news-arrow,
 .impact-news:focus-visible .impact-news-arrow { transform: translate(0.22rem, -0.22rem); }
 .impact-news:focus-visible { outline: 2px solid var(--highlight-color); outline-offset: 3px; }
@@ -1360,15 +1327,14 @@ body:has(.site-scroll-navbar[data-visible="false"]) .impact-sticky-frame {
 
   .impact-grid {
     grid-template-areas:
-      "attendees"
-      "faculties"
-      "award2025"
-      "award2026"
-      "partners"
-      "impressions"
-      "nps"
-      "news";
-    grid-template-columns: 1fr;
+      "attendees attendees"
+      "faculties faculties"
+      "award2025 award2026"
+      "partners partners"
+      "impressions impressions"
+      "nps nps"
+      "news news";
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     grid-template-rows: none;
   }
 
@@ -1383,6 +1349,12 @@ body:has(.site-scroll-navbar[data-visible="false"]) .impact-sticky-frame {
   }
 
   .partner-benefit-grid { grid-template-columns: 1fr; }
+  .partner-benefit-grid > :nth-child(1) { order: 0; }
+  .partner-benefit-grid > :nth-child(2) { order: 1; }
+  .partner-benefit-grid > :nth-child(5) { order: 2; }
+  .partner-benefit-grid > :nth-child(6) { order: 3; }
+  .partner-benefit-grid > :nth-child(3) { order: 4; }
+  .partner-benefit-grid > :nth-child(4) { order: 5; }
   .partner-benefit-card,
   .partner-benefit-image { min-height: 14rem; }
 
