@@ -2,8 +2,8 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import { CoffeeConnectionFigure } from "@/components/coffee-connection-figure";
-import { PartnerObjectFigure } from "@/components/partner-object-figure";
+import { HairlineFigure } from "@/components/hairline-figure";
+import type { HairlineVariant } from "@/lib/hairline/runtime";
 
 const partners = [
   ["RBC", "rbc"],
@@ -345,69 +345,19 @@ function TestimonialCarousel() {
   );
 }
 
-function BenefitCard({ index }: { index: number }) {
+function BenefitCard({ index }: { index: 0 | 1 | 2 }) {
   const [number, title, description] = benefits[index];
   return (
-    <article className="partner-benefit-card" data-coffee={index === 0 ? "true" : undefined} data-object={index === 1 ? "laptop" : index === 2 ? "billboard" : undefined}>
+    <article className="partner-benefit-card" data-object={index === 0 ? "nfc" : index === 1 ? "laptop" : "billboard"}>
       <span>{number}</span>
-      {index === 0 && <CoffeeConnectionFigure />}
-      {index === 1 && <PartnerObjectFigure variant="laptop" />}
-      {index === 2 && <PartnerObjectFigure variant="billboard" />}
+      {index === 0 && <HairlineFigure variant="nfc" />}
+      {index === 1 && <HairlineFigure variant="laptop" />}
+      {index === 2 && <HairlineFigure variant="billboard" />}
       <div>
         <h3>{title}</h3>
         <p>{description}</p>
       </div>
     </article>
-  );
-}
-
-type StatGraphicVariant =
-  | "attendees"
-  | "partners"
-  | "score"
-  | "award"
-  | "impressions";
-
-function StatGraphic({ variant }: { variant: StatGraphicVariant }) {
-  return (
-    <svg
-      aria-hidden="true"
-      className="impact-stat-graphic"
-      data-variant={variant}
-      viewBox="0 0 96 72"
-    >
-      {variant === "attendees" && (
-        <>
-          <circle cx="38" cy="27" r="10" />
-          <circle cx="61" cy="31" r="7" />
-          <path d="M18 61c2-15 10-23 20-23s19 8 21 23M51 61c1-11 6-17 14-17 7 0 12 6 13 17" />
-        </>
-      )}
-      {variant === "partners" && (
-        <>
-          <rect x="17" y="24" width="62" height="39" rx="6" />
-          <path d="M36 24v-8h24v8M17 38c13 8 49 8 62 0M43 39h10v9H43z" />
-        </>
-      )}
-      {variant === "score" && (
-        <>
-          <path d="M13 57 35 37l14 11 30-33" />
-          <path d="M63 15h16v16" />
-        </>
-      )}
-      {variant === "award" && (
-        <>
-          <path d="M31 13h34v13c0 14-7 23-17 23S31 40 31 26V13Z" />
-          <path d="M31 20H19v7c0 9 5 14 14 15M65 20h12v7c0 9-5 14-14 15M48 49v10M35 63h26" />
-        </>
-      )}
-      {variant === "impressions" && (
-        <>
-          <circle cx="48" cy="36" r="5" />
-          <path d="M35 24a18 18 0 0 0 0 24M61 24a18 18 0 0 1 0 24M25 15a30 30 0 0 0 0 42M71 15a30 30 0 0 1 0 42" />
-        </>
-      )}
-    </svg>
   );
 }
 
@@ -426,7 +376,7 @@ function StatCard({
   decimals?: number;
   label: string;
   detail?: string;
-  graphic: StatGraphicVariant;
+  graphic: Extract<HairlineVariant, "registrations" | "partners" | "satisfaction" | "megaphone">;
 }) {
   return (
     <article
@@ -438,7 +388,7 @@ function StatCard({
           <h3>{label}</h3>
           {detail ? <p>{detail}</p> : null}
         </div>
-        <StatGraphic variant={graphic} />
+        <HairlineFigure variant={graphic} />
       </div>
     </article>
   );
@@ -456,7 +406,7 @@ function AwardCard({ className, year }: { className: string; year: string }) {
           </span>
           <h3>Conference of the Year</h3>
         </div>
-        <StatGraphic variant="award" />
+        <HairlineFigure variant="trophy" />
       </div>
     </article>
   );
@@ -601,7 +551,7 @@ export function ImpactSection() {
                 target={380}
                 suffix="+"
                 label="Attendee registrations"
-                graphic="attendees"
+                graphic="registrations"
               />
               <StatCard
                 className="impact-partners"
@@ -615,15 +565,17 @@ export function ImpactSection() {
                 target={87}
                 suffix="%"
                 label="Net promoter score"
-                graphic="score"
+                graphic="satisfaction"
               />
               <article className="impact-card impact-faculties">
-                <div>
+                <div className="impact-faculty-heading">
                   <h3 className="text-xl">Faculty representation</h3>
+                  <hr className="impact-faculty-divider" />
+                  <HairlineFigure variant="faculty" />
                 </div>
                 <dl className="impact-faculty-list">
                   {facultyMix.map(([faculty, value]) => (
-                    <div key={faculty}>
+                    <div key={faculty} data-faculty-label={faculty} tabIndex={0}>
                       <dt>{faculty}</dt>
                       <dd>{value}</dd>
                     </div>
@@ -638,7 +590,7 @@ export function ImpactSection() {
                 suffix="M+"
                 decimals={1}
                 label="Social media impressions"
-                graphic="impressions"
+                graphic="megaphone"
               />
               <a
                 className="impact-card impact-news"
@@ -648,9 +600,12 @@ export function ImpactSection() {
               >
                 <div className="impact-news-content">
                   <p className="site-eyebrow">Featured on Global News</p>
-                  <span className="impact-news-arrow" aria-hidden="true">
-                    ↗
-                  </span>
+                  <div className="impact-news-footer">
+                    <HairlineFigure variant="television" />
+                    <span className="impact-news-arrow" aria-hidden="true">
+                      ↗
+                    </span>
+                  </div>
                 </div>
               </a>
             </div>

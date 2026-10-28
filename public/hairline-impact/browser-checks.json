@@ -1,0 +1,303 @@
+[
+  {
+    "name": "attendee-badges",
+    "errors": [],
+    "states": [
+      {
+        "query": "?theme=light",
+        "read": "rest",
+        "error": "",
+        "box": {
+          "x": 73.05999755859375,
+          "y": 72.62000274658203,
+          "width": 253.260009765625,
+          "height": 220.52999877929688
+        },
+        "highlights": 1
+      },
+      {
+        "query": "?theme=dark&at=280,199&intensity=0",
+        "read": "badge 3",
+        "error": "",
+        "box": {
+          "x": 73,
+          "y": 72.30999755859375,
+          "width": 250.3599853515625,
+          "height": 210.23001098632812
+        },
+        "highlights": 1
+      },
+      {
+        "query": "?theme=light&at=280,199&intensity=1",
+        "read": "badge 3",
+        "error": "",
+        "box": {
+          "x": 73,
+          "y": 71.45999908447266,
+          "width": 250.3599853515625,
+          "height": 202.08001708984375
+        },
+        "highlights": 1
+      }
+    ],
+    "pass": true
+  },
+  {
+    "name": "feedback-token",
+    "errors": [],
+    "states": [
+      {
+        "query": "?theme=light",
+        "read": "rest",
+        "error": "",
+        "box": {
+          "x": 88.02999877929688,
+          "y": 61.09000015258789,
+          "width": 225.26998901367188,
+          "height": 209.1300048828125
+        },
+        "highlights": 1
+      },
+      {
+        "query": "?theme=dark&at=257,173&intensity=0",
+        "read": "feedback",
+        "error": "",
+        "box": {
+          "x": 89.66000366210938,
+          "y": 62.310001373291016,
+          "width": 225.5,
+          "height": 206.08001708984375
+        },
+        "highlights": 1
+      },
+      {
+        "query": "?theme=light&at=257,173&intensity=1",
+        "read": "feedback",
+        "error": "",
+        "box": {
+          "x": 93.81999969482422,
+          "y": 60.849998474121094,
+          "width": 225.58999633789062,
+          "height": 206.51998901367188
+        },
+        "highlights": 1
+      }
+    ],
+    "pass": true
+  },
+  {
+    "name": "partners-network",
+    "errors": [],
+    "states": [
+      {
+        "query": "?theme=light",
+        "read": "rest",
+        "error": "",
+        "box": {
+          "x": 53.86000061035156,
+          "y": 100.66000366210938,
+          "width": 292.280029296875,
+          "height": 147.2899932861328
+        },
+        "highlights": 1
+      },
+      {
+        "query": "?theme=dark&at=151,122&intensity=0",
+        "read": "RBC",
+        "error": "",
+        "box": {
+          "x": 53.86000061035156,
+          "y": 100.30000305175781,
+          "width": 292.280029296875,
+          "height": 147.5399932861328
+        },
+        "highlights": 2
+      },
+      {
+        "query": "?theme=light&at=151,122&intensity=1",
+        "read": "RBC",
+        "error": "",
+        "box": {
+          "x": 53.86000061035156,
+          "y": 88.5199966430664,
+          "width": 292.280029296875,
+          "height": 159.11001586914062
+        },
+        "highlights": 2
+      }
+    ],
+    "pass": true
+  },
+  {
+    "name": "faculty-pie",
+    "errors": [],
+    "states": [
+      {
+        "query": "?theme=light",
+        "read": "rest",
+        "error": "",
+        "box": {
+          "x": 56.5,
+          "y": 78.22000122070312,
+          "width": 287,
+          "height": 159.52999877929688
+        },
+        "highlights": 1
+      },
+      {
+        "query": "?theme=dark&at=117,155&intensity=0",
+        "read": "Science 36.3%",
+        "error": "",
+        "box": {
+          "x": 56.5,
+          "y": 78.1500015258789,
+          "width": 287,
+          "height": 159.60000610351562
+        },
+        "highlights": 1
+      },
+      {
+        "query": "?theme=light&at=117,155&intensity=1",
+        "read": "Science 36.3%",
+        "error": "",
+        "box": {
+          "x": 56.5,
+          "y": 77.5199966430664,
+          "width": 287,
+          "height": 160.23001098632812
+        },
+        "highlights": 1
+      }
+    ],
+    "pass": true
+  },
+  {
+    "name": "conference-trophy",
+    "errors": [],
+    "states": [
+      {
+        "query": "?theme=light",
+        "read": "rest",
+        "error": "",
+        "box": {
+          "x": 97.44000244140625,
+          "y": 20.84000015258789,
+          "width": 205.1199951171875,
+          "height": 269.0899963378906
+        },
+        "highlights": 1
+      },
+      {
+        "query": "?theme=dark&at=280,130&intensity=0",
+        "read": "trophy",
+        "error": "",
+        "box": {
+          "x": 101.30000305175781,
+          "y": 20.8700008392334,
+          "width": 197.40000915527344,
+          "height": 269.6100158691406
+        },
+        "highlights": 1
+      },
+      {
+        "query": "?theme=light&at=280,130&intensity=1",
+        "read": "trophy",
+        "error": "",
+        "box": {
+          "x": 108.73999786376953,
+          "y": 20.8799991607666,
+          "width": 182.52001953125,
+          "height": 270.25
+        },
+        "highlights": 1
+      }
+    ],
+    "pass": true
+  },
+  {
+    "name": "social-megaphone",
+    "errors": [],
+    "states": [
+      {
+        "query": "?theme=light",
+        "read": "rest",
+        "error": "",
+        "box": {
+          "x": 106.08999633789062,
+          "y": 90.11000061035156,
+          "width": 206.57000732421875,
+          "height": 170.9300079345703
+        },
+        "highlights": 1
+      },
+      {
+        "query": "?theme=dark&at=285,135&intensity=0",
+        "read": "megaphone",
+        "error": "",
+        "box": {
+          "x": 108.23999786376953,
+          "y": 92.62000274658203,
+          "width": 205.44000244140625,
+          "height": 167.989990234375
+        },
+        "highlights": 1
+      },
+      {
+        "query": "?theme=light&at=285,135&intensity=1",
+        "read": "megaphone",
+        "error": "",
+        "box": {
+          "x": 112.47000122070312,
+          "y": 96.55999755859375,
+          "width": 201.8699951171875,
+          "height": 163.30999755859375
+        },
+        "highlights": 1
+      }
+    ],
+    "pass": true
+  },
+  {
+    "name": "news-television",
+    "errors": [],
+    "states": [
+      {
+        "query": "?theme=light",
+        "read": "rest",
+        "error": "",
+        "box": {
+          "x": 82.55000305175781,
+          "y": 39.619998931884766,
+          "width": 233.3400115966797,
+          "height": 275.3999938964844
+        },
+        "highlights": 1
+      },
+      {
+        "query": "?theme=dark&at=142,84&intensity=0",
+        "read": "antenna 1",
+        "error": "",
+        "box": {
+          "x": 82.55000305175781,
+          "y": 40.529998779296875,
+          "width": 233.3400115966797,
+          "height": 274.489990234375
+        },
+        "highlights": 1
+      },
+      {
+        "query": "?theme=light&at=142,84&intensity=1",
+        "read": "antenna 1",
+        "error": "",
+        "box": {
+          "x": 82.55000305175781,
+          "y": 42.33000183105469,
+          "width": 233.3400115966797,
+          "height": 272.69000244140625
+        },
+        "highlights": 1
+      }
+    ],
+    "pass": true
+  }
+]

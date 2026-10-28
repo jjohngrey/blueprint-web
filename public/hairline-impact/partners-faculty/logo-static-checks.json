@@ -1,0 +1,209 @@
+{
+  "interaction": [
+    {
+      "key": "a16z",
+      "read": "a16z",
+      "exactlyOneActive": true,
+      "colorVisible": true,
+      "stableAfterLift": true,
+      "point": [
+        253.4926279967623,
+        116.9301733072559
+      ]
+    },
+    {
+      "key": "rbc",
+      "read": "RBC",
+      "exactlyOneActive": true,
+      "colorVisible": true,
+      "stableAfterLift": true,
+      "point": [
+        151.3156981153062,
+        122.46247752310606
+      ]
+    },
+    {
+      "key": "geocomply",
+      "read": "GeoComply",
+      "exactlyOneActive": true,
+      "colorVisible": true,
+      "stableAfterLift": true,
+      "point": [
+        313.59670439761885,
+        169.50302492385265
+      ]
+    },
+    {
+      "key": "ea",
+      "read": "EA",
+      "exactlyOneActive": true,
+      "colorVisible": true,
+      "stableAfterLift": true,
+      "point": [
+        86.40329560238114,
+        172.04226880909513
+      ]
+    },
+    {
+      "key": "tesla",
+      "read": "Tesla",
+      "exactlyOneActive": true,
+      "colorVisible": true,
+      "stableAfterLift": true,
+      "point": [
+        144.10320894720343,
+        222.84842860197162
+      ]
+    },
+    {
+      "key": "deloitte",
+      "read": "Deloitte",
+      "exactlyOneActive": true,
+      "colorVisible": true,
+      "stableAfterLift": true,
+      "point": [
+        254.69470952477946,
+        222.72549126219855
+      ]
+    },
+    {
+      "leave": "rest",
+      "allRest": true
+    },
+    {
+      "destroyClearsSvg": true
+    }
+  ],
+  "frame": [
+    {
+      "label": "rest",
+      "bounds": [
+        53,
+        100,
+        346,
+        248
+      ],
+      "inFrame": true
+    },
+    {
+      "label": "4:a16z",
+      "bounds": [
+        53,
+        94,
+        346,
+        248
+      ],
+      "inFrame": true
+    },
+    {
+      "label": "4:rbc",
+      "bounds": [
+        53,
+        100,
+        346,
+        248
+      ],
+      "inFrame": true
+    },
+    {
+      "label": "4:geocomply",
+      "bounds": [
+        53,
+        100,
+        346,
+        248
+      ],
+      "inFrame": true
+    },
+    {
+      "label": "4:ea",
+      "bounds": [
+        53,
+        100,
+        346,
+        247
+      ],
+      "inFrame": true
+    },
+    {
+      "label": "4:tesla",
+      "bounds": [
+        53,
+        100,
+        346,
+        247
+      ],
+      "inFrame": true
+    },
+    {
+      "label": "4:deloitte",
+      "bounds": [
+        53,
+        100,
+        346,
+        247
+      ],
+      "inFrame": true
+    },
+    {
+      "label": "12:a16z",
+      "bounds": [
+        53,
+        82,
+        346,
+        247
+      ],
+      "inFrame": true
+    },
+    {
+      "label": "12:rbc",
+      "bounds": [
+        53,
+        88,
+        346,
+        247
+      ],
+      "inFrame": true
+    },
+    {
+      "label": "12:geocomply",
+      "bounds": [
+        53,
+        99,
+        346,
+        247
+      ],
+      "inFrame": true
+    },
+    {
+      "label": "12:ea",
+      "bounds": [
+        53,
+        100,
+        346,
+        247
+      ],
+      "inFrame": true
+    },
+    {
+      "label": "12:tesla",
+      "bounds": [
+        53,
+        100,
+        346,
+        247
+      ],
+      "inFrame": true
+    },
+    {
+      "label": "12:deloitte",
+      "bounds": [
+        53,
+        100,
+        346,
+        247
+      ],
+      "inFrame": true
+    }
+  ]
+}

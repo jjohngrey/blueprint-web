@@ -1,0 +1,146 @@
+{
+  "desktop": {
+    "extraControls": 0,
+    "figures": [
+      {
+        "paths": 8,
+        "stroke": "0.65px",
+        "text": "",
+        "variant": "nfc",
+        "width": 170
+      },
+      {
+        "paths": 14,
+        "stroke": "0.65px",
+        "text": "",
+        "variant": "registrations",
+        "width": 96
+      },
+      {
+        "paths": 38,
+        "stroke": "0.65px",
+        "text": "",
+        "variant": "partners",
+        "width": 110
+      },
+      {
+        "paths": 6,
+        "stroke": "0.65px",
+        "text": "",
+        "variant": "satisfaction",
+        "width": 96
+      },
+      {
+        "paths": 12,
+        "stroke": "0.65px",
+        "text": "",
+        "variant": "faculty",
+        "width": 80
+      },
+      {
+        "paths": 12,
+        "stroke": "0.65px",
+        "text": "",
+        "variant": "trophy",
+        "width": 72
+      },
+      {
+        "paths": 12,
+        "stroke": "0.65px",
+        "text": "",
+        "variant": "trophy",
+        "width": 72
+      },
+      {
+        "paths": 7,
+        "stroke": "0.65px",
+        "text": "",
+        "variant": "megaphone",
+        "width": 72
+      },
+      {
+        "paths": 10,
+        "stroke": "0.65px",
+        "text": "",
+        "variant": "television",
+        "width": 88
+      }
+    ],
+    "horizontalOverflow": false,
+    "viewport": {
+      "height": 986,
+      "width": 1785
+    }
+  },
+  "mobile": {
+    "requestedWidth": 375,
+    "contentWidth": 360,
+    "horizontalOverflow": false,
+    "allFiguresWithinCards": true
+  },
+  "companySelections": [
+    [
+      {
+        "colored": "inline",
+        "colors": [
+          "rgb(0, 89, 179)",
+          "rgb(255, 222, 0)",
+          "rgb(255, 255, 255)"
+        ],
+        "company": "rbc",
+        "outline": "none"
+      }
+    ],
+    [
+      {
+        "colored": "inline",
+        "colors": [
+          "rgb(0, 0, 0)"
+        ],
+        "company": "a16z",
+        "outline": "none"
+      }
+    ],
+    [
+      {
+        "colored": "inline",
+        "colors": [
+          "rgb(0, 65, 237)"
+        ],
+        "company": "geocomply",
+        "outline": "none"
+      }
+    ],
+    [
+      {
+        "colored": "inline",
+        "colors": [
+          "rgb(0, 0, 0)",
+          "rgb(128, 195, 66)"
+        ],
+        "company": "deloitte",
+        "outline": "none"
+      }
+    ],
+    [
+      {
+        "colored": "inline",
+        "colors": [
+          "rgb(232, 33, 39)"
+        ],
+        "company": "tesla",
+        "outline": "none"
+      }
+    ],
+    [
+      {
+        "colored": "inline",
+        "colors": [
+          "rgb(37, 90, 246)"
+        ],
+        "company": "ea",
+        "outline": "none"
+      }
+    ]
+  ]
+}
