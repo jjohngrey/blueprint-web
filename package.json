@@ -6,15 +6,18 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "test": "node --import tsx --conditions=react-server --test tests/*.test.ts"
   },
   "dependencies": {
+    "@googleapis/sheets": "^18.1.1",
     "@lucasmarkes/hairline": "^0.5.1",
     "@vercel/analytics": "^2.0.1",
     "next": "16.3.5",
     "react": "19.2.8",
     "react-dom": "19.2.8",
     "react-isokit": "^0.5.0",
+    "server-only": "^0.0.1",
     "three": "^0.186.1"
   },
   "devDependencies": {
@@ -26,6 +29,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.3.5",
     "tailwindcss": "^4",
+    "tsx": "^4.23.15",
     "typescript": "^5"
   }
 }

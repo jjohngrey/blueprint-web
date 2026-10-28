@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useRef, useState, type FormEvent } from "react";
 
 function BellIcon() {
   return (
@@ -11,10 +11,13 @@ function BellIcon() {
 }
 
 export function SubscriberForm({ available }: { available: boolean }) {
-  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "duplicate" | "error">("idle");
+  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+  const inFlight = useRef(false);
 
   const subscribe = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    if (inFlight.current) return;
+    inFlight.current = true;
     setStatus("submitting");
     const form = event.currentTarget;
     const data = new FormData(form);
@@ -25,22 +28,21 @@ export function SubscriberForm({ available }: { available: boolean }) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: data.get("email"), website: data.get("website") }),
       });
-      const result = (await response.json()) as { alreadySubscribed?: boolean };
       if (!response.ok) throw new Error("Subscription failed");
-      setStatus(result.alreadySubscribed ? "duplicate" : "success");
-      if (!result.alreadySubscribed) form.reset();
+      setStatus("success");
+      form.reset();
     } catch {
       setStatus("error");
+    } finally {
+      inFlight.current = false;
     }
   };
 
   const message = status === "success"
     ? "You’re on the list."
-    : status === "duplicate"
-      ? "You’re already on the list."
-      : status === "error"
-        ? "Could not subscribe. Try again."
-        : "";
+    : status === "error"
+      ? "Could not subscribe. Try again."
+      : "";
   const buttonLabel = status === "submitting" ? "Adding you" : "Stay up to date";
 
   if (!available) return (
@@ -57,9 +59,9 @@ export function SubscriberForm({ available }: { available: boolean }) {
   );
 
   return (
-    <form className="subscriber-form" onSubmit={subscribe}>
+    <form className="subscriber-form" onSubmit={subscribe} aria-busy={status === "submitting"}>
       <label className="sr-only" htmlFor="subscriber-email">Email address</label>
-      <input id="subscriber-email" name="email" type="email" autoComplete="email" placeholder="Email address" maxLength={254} required className="subscriber-input" />
+      <input id="subscriber-email" name="email" type="email" autoComplete="email" placeholder="Email address" maxLength={254} required className="subscriber-input" aria-describedby="subscriber-consent" />
       <input name="website" type="text" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
       <button className="subscriber-button button-roll" type="submit" disabled={status === "submitting"}>
         <span className="button-roll-window" aria-hidden="true">
@@ -69,6 +71,7 @@ export function SubscriberForm({ available }: { available: boolean }) {
         <BellIcon />
         <span className="sr-only">{buttonLabel}</span>
       </button>
+      <p id="subscriber-consent" className="col-span-full text-center text-xs text-black/60">By signing up, you agree to receive BluePrint Tech Week email updates.</p>
       <span className="subscriber-status" role="status" aria-live="polite">{message}</span>
     </form>
   );
